@@ -1,11 +1,11 @@
 .demo{ background-color: #f5f5f5; }
 
 .form-container{
-    background: linear-gradient(#E9374C,#D31128);
+    background: linear-gradient(blue,#29058b);
     font-family: 'Roboto', sans-serif;
     font-size: 0;
     padding: 0 15px;
-    border: 1px solid #DC2036;
+    border: 1px solid blue;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
@@ -101,7 +101,7 @@
 
 .form-horizontal .btn{
     color: rgba(255,255,255,0.8);
-    background: #E9374C;
+    background:blue;
     font-size: 15px;
     font-weight: 500;
     text-transform: uppercase;
@@ -116,7 +116,7 @@
 .form-horizontal .btn:hover,
 .form-horizontal .btn:focus{
     color: #fff;
-    background-color: #D31128;
+    background-color: blue;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
@@ -136,16 +136,3 @@
     text-decoration: underline;
 }
 
-@media only screen and (max-width:576px){
-    .form-container{ padding-bottom: 15px; }
-
-    .form-container .form-icon{
-        width: 100%;
-        padding: 20px 0;
-    }
-
-    .form-container .form-horizontal{
-        width: 100%;
-        margin: 0;
-    }
-}
