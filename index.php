@@ -35,11 +35,11 @@
                             <h3 class="title">Credenciales</h3>
                             <div class="form-group">
                                 <span class="input-icon"><i class="fa-solid fa-user"></i></span>
-                                <input class="form-control" type="text" placeholder="Usuario" />
+                                <input class="form-control" id="IdUsuario" name="IdUsuario" type="text" placeholder="Usuario" />
                             </div>
                             <div class="form-group">
                                 <span class="input-icon"><i class="fa fa-lock"></i></span>
-                                <input class="form-control" type="password" placeholder="Contraseña" />
+                                <input class="form-control" id="Password" name="Password" type="password" placeholder="Contraseña" />
                             </div>
                             <button class="btn signin">Ingresar</button>
                             <span class="forgot-pass"><a href="#">Olvido Usuario/Contraseña?</a></span>
