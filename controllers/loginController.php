@@ -7,7 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Password = $_POST['Password'];
     echo $IdUsuario;
     echo $Password;
-    login($IdUsuario, $Password);
+    $valido=login($IdUsuario, $Password);
+    if($valido){
+
+    header("Location: ../menu/menu.php");
+    exit();
+    }
+
 }
+    
+
 
 ?>

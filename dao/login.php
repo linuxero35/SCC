@@ -19,8 +19,10 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+return $count >0;
 } catch (Exception $e) {
     echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+
 }
 }
     
