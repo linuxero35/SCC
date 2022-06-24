@@ -17,26 +17,26 @@
         </center>
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">Nombre</label>
-          <input type="email" class="form-control" id="inputEmail4">
+          <input type="email" class="form-control" id="txtn" name="txtn">
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">Apelliodo Paterno</label>
-          <input type="password" class="form-control" id="inputPassword4">
+          <input type="password" class="form-control" id="txtp" name="txtp">
         </div>
         <div class="col-md-6">
           <label for="inputAddress" class="form-label">Apellido Materno</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+          <input type="text" class="form-control" id="txtm" name="txtm" placeholder="1234 Main St">
         </div>
         <div class="col-md-6">
           <label for="inputAddress2" class="form-label">Correo Electrónico</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+          <input type="text" class="form-control" id="txtc" name="txtc" placeholder="Apartment, studio, or floor">
         </div>
         <div class="col-md-6">
           <div class="form-check">
           <label class="form-check-label" for="gridCheck">
               Activo
             </label>
-            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <input class="form-check-input" type="checkbox" id="txta" name="txta">
           </div>
         </div>
         
@@ -48,7 +48,7 @@
         </center>
         <div class="col-md-6">
           <label for="inputCity" class="form-label">Generación</label>
-          <input type="text" class="form-control" id="inputCity">
+          <input type="text" class="form-control" id="txtg" name="txtg">
         </div>
         <div class="col-md-6">
           <label for="inputState" class="form-label">Grado</label>
@@ -59,11 +59,11 @@
         </div>
         <div class="col-md-6">
           <label for="inputZip" class="form-label">Año</label>
-          <input type="text" class="form-control" id="inputZip">
+          <input type="text" class="form-control" id="txtan" name="txtan">
         </div>
         <div class="col-md-6">
           <label for="inputCity" class="form-label">No.Lista</label>
-          <input type="text" class="form-control" id="inputCity">
+          <input type="text" class="form-control" id="txtno" name="txtno">
         </div>
 
         
