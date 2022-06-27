@@ -91,67 +91,69 @@
     </div>
     <div>
       <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+        <center>
         <h1 style="color: white;">Captura del Alumno</h1>
+        </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
         <form class="row g-3">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
-            <center>
+            
               <div class="container">
                 <h2>Datos Personales</h2>
               </div>
-            </center>
+            
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="email" class="form-control" id="inputEmail4">
+              <input type="email" class="form-control" id="txtn" name="txtn">
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Apelliodo Paterno</label>
-              <input type="password" class="form-control" id="inputPassword4">
+              <input type="password" class="form-control" id="txtap" name="txtap">
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+              <input type="text" class="form-control" id="txtam" name="txtam" placeholder="">
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Correo Electrónico</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+              <input type="text" class="form-control" id="txtc" name="txtc" placeholder="">
             </div>
             <div class="col-md-6" style="padding-top: 10px;">
               <div class="form-check">
                 <label class="form-check-label" for="gridCheck">
                   Activo
                 </label>
-                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <input class="form-check-input" type="checkbox" id="txtac" name="txtac">
               </div>
             </div>
           </div>
           <div class="container" style="padding: 1px;"></div>
           <div class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
-            <center>
+            
               <div>
                 <h2>Datos Escolares</h2>
               </div>
-            </center>
+            
             <div class="col-md-6">
               <label for="inputCity" class="form-label">Generación</label>
-              <input type="text" class="form-control" id="inputCity">
+              <input type="text" class="form-control" id="txtg" name="txtg">
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
-              <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select id="txtgr" name="txtgr" class="form-select">
+                <option selected>Grado</option>
+                <option></option>
               </select>
             </div>
             <div class="col-md-6">
               <label for="inputZip" class="form-label">Año</label>
-              <input type="text" class="form-control" id="inputZip">
+              <input type="text" class="form-control" id="txtan" name="txtan">
             </div>
             <div class="col-md-6">
               <label for="inputCity" class="form-label">No.Lista</label>
-              <input type="text" class="form-control" id="inputCity">
+              <input type="text" class="form-control" id="txtno" name="txtno">
             </div>
           </div>
           <div class="col-12" style="padding: 12px;">
