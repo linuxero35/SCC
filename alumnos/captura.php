@@ -1,3 +1,7 @@
+<?php
+include '../services/grados/gradosService.php';
+$gradosSelect=getGradosSelec();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +101,7 @@
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3">
+        <form class="row g-3" method="POST" action="">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             
               <div class="container">
@@ -142,10 +146,9 @@
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
-              <select id="txtgr" name="txtgr" class="form-select">
-                <option selected>Grado</option>
-                <option></option>
-              </select>
+              <?php
+             echo  $gradosSelect;
+              ?>
             </div>
             <div class="col-md-6">
               <label for="inputZip" class="form-label">Año</label>
