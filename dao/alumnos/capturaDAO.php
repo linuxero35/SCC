@@ -1,5 +1,5 @@
 <?php
-include '../conexiones/mysql_conexion.php';
+include_once '../conexiones/mysql_conexion.php';
 
 function loginDAO($IdUsuario, $Password)
 {
@@ -25,15 +25,21 @@ function loginDAO($IdUsuario, $Password)
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
 }
+
 function insertarAlumnoDAO($alumno)
 {
     try {
         $conn = getConnection();
-        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) VALUES ('" . $alumno["nombre"] . "' ,'".$alumno["apePat"]."','".$alumno["apeMat"]."','".$alumno["anio"]."',1,1,now(),NULL,NULL)";
+
+        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " +
+        "VALUES ('" . $alumno["nombre"] . "' ,'".$alumno["apePat"]."','".$alumno["apeMat"]."','".$alumno["anio"]."',1,1,now(),NULL,NULL)";
         
+        $result = $conn -> query($sql);
+
+        echo 'Hola';
+
     } catch(Exception $e){
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
-
 }
 ?>

@@ -101,7 +101,7 @@ $gradosSelect=getGradosSelec();
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="POST" action="">
+        <form class="row g-3" method="POST" action="../controllers/alumnos/alumnosInsertController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             
               <div class="container">
@@ -110,11 +110,11 @@ $gradosSelect=getGradosSelec();
             
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="email" class="form-control" id="txtn" name="txtn">
+              <input type="text" class="form-control" id="txtn" name="txtn">
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Apelliodo Paterno</label>
-              <input type="password" class="form-control" id="txtap" name="txtap">
+              <input type="text" class="form-control" id="txtap" name="txtap">
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Apellido Materno</label>
@@ -122,7 +122,7 @@ $gradosSelect=getGradosSelec();
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Correo Electrónico</label>
-              <input type="text" class="form-control" id="txtc" name="txtc" placeholder="">
+              <input type="email" class="form-control" id="txtc" name="txtc" placeholder="">
             </div>
             <div class="col-md-6" style="padding-top: 10px;">
               <div class="form-check">
