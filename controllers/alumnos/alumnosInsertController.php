@@ -1,20 +1,28 @@
 <?php
-include "../../services/alumnos/capturaService.php";
+require_once "/wamp64/www/SCC/services/alumnos/capturaService.php";
+
 
 try{
 if (!empty($_POST)) {
+
+    $activo = 0;
+
+    if(isset($_POST['activo'])) {
+      $activo = 1;
+    }
+
     $alumno = array(
         "nombre" => $_POST['txtn'],
         "apePat" => $_POST['txtap'],
         "apeMat" => $_POST['txtam'],
         "correo" => $_POST['txtc'],
-        "activo" => $_POST['txtac'],
+        "activo" => $activo,
         "generacion" => $_POST['txtg'],
-        "grado" => $_POST['txtgr'],
+        "grado" => $_POST['idGrado'],
         "anio" => $_POST['txtan'],
-        "numero" => $_POST['txtno']
+        "numLista" => $_POST['txtno']
     );
-
+    print_r ($alumno);
     insertarAlumno($alumno);
 }
 }catch(Exception $e){

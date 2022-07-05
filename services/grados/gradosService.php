@@ -2,7 +2,7 @@
 include '../dao/grados/gradosDAO.php';
 function getGradosSelec()
 {
-    $select = '<select id="txtgr" name="txtgr" class="form-select">';
+    $select = '<select id="txtgr" onchange="setValue(this.selectedIndex);" name="txtgr" class="form-select">';
     $registros = consultaGrados();
     $contador = 0;
     while ($contador < count($registros)) {

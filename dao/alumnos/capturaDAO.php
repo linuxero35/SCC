@@ -1,5 +1,5 @@
 <?php
-include_once '../conexiones/mysql_conexion.php';
+require_once '/wamp64/www/SCC/conexiones/mysql_conexion.php';
 
 function loginDAO($IdUsuario, $Password)
 {
@@ -31,15 +31,38 @@ function insertarAlumnoDAO($alumno)
     try {
         $conn = getConnection();
 
-        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " +
+        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " .
         "VALUES ('" . $alumno["nombre"] . "' ,'".$alumno["apePat"]."','".$alumno["apeMat"]."','".$alumno["anio"]."',1,1,now(),NULL,NULL)";
+
         
         $result = $conn -> query($sql);
-
-        echo 'Hola';
-
+        $idAlumno = $conn->insert_id;
+        echo $sql;
+        return $idAlumno;
+        
     } catch(Exception $e){
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    } finally{
+        $conn -> close();
+
     }
 }
+    function insertarAlumnoGrados($alumno, $idAlumno)
+    {
+        try{
+            $conn = getConnection();
+
+            $sql= "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " .  
+            "VALUES (" . $alumno["grado"].",".$idAlumno.",".$alumno["numLista"].",1,1,now(),NULL,NULL)";
+
+            $result = $conn -> query($sql);
+
+            echo $sql;
+            
+        } catch(Exception $e){
+            echo 'Excepcion capturada: ', $e->getMessage(), "\n";
+        } finally{
+            $conn->close();
+        }
+    }
 ?>

@@ -1,5 +1,5 @@
 <?php
-include '../services/grados/gradosService.php';
+require_once '../services/grados/gradosService.php';
 $gradosSelect=getGradosSelec();
 ?>
 <!DOCTYPE html>
@@ -86,6 +86,11 @@ $gradosSelect=getGradosSelec();
   padding-right: 30%;
 }
   </style>
+  <script>
+  function setValue(id){
+    document.getElementById("idGrado").value=id;
+  }
+  </script>
 </head>
 
 <body>
@@ -101,7 +106,7 @@ $gradosSelect=getGradosSelec();
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="POST" action="../controllers/alumnos/alumnosInsertController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/alumnos/alumnosInsertController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             
               <div class="container">
@@ -110,26 +115,26 @@ $gradosSelect=getGradosSelec();
             
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="txtn" name="txtn">
+              <input type="text" maxlength="30" class="form-control" id="txtn" name="txtn" required>
             </div>
             <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Apelliodo Paterno</label>
-              <input type="text" class="form-control" id="txtap" name="txtap">
+              <label for="inputPassword4" class="form-label">Apellido Paterno</label>
+              <input type="text" maxlength="30" class="form-control" id="txtap" name="txtap" required>
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="txtam" name="txtam" placeholder="">
+              <input type="text" maxlength="30" class="form-control" id="txtam" name="txtam" placeholder="" required>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Correo Electrónico</label>
-              <input type="email" class="form-control" id="txtc" name="txtc" placeholder="">
+              <input type="email" maxlength="45" class="form-control" id="txtc" name="txtc" placeholder="" required>
             </div>
             <div class="col-md-6" style="padding-top: 10px;">
               <div class="form-check">
                 <label class="form-check-label" for="gridCheck">
                   Activo
                 </label>
-                <input class="form-check-input" type="checkbox" id="txtac" name="txtac">
+                <input type="checkbox" class="form-check-input" checked="true" id="activo" name="activo[]" required>
               </div>
             </div>
           </div>
@@ -142,21 +147,22 @@ $gradosSelect=getGradosSelec();
             
             <div class="col-md-6">
               <label for="inputCity" class="form-label">Generación</label>
-              <input type="text" class="form-control" id="txtg" name="txtg">
+              <input type="number" class="form-control" id="txtg" name="txtg" required>
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
+              <input type="hidden" id="idGrado" name="idGrado">
               <?php
              echo  $gradosSelect;
               ?>
             </div>
             <div class="col-md-6">
               <label for="inputZip" class="form-label">Año</label>
-              <input type="text" class="form-control" id="txtan" name="txtan">
+              <input type="number" class="form-control" id="txtan" name="txtan" required>
             </div>
             <div class="col-md-6">
               <label for="inputCity" class="form-label">No.Lista</label>
-              <input type="text" class="form-control" id="txtno" name="txtno">
+              <input type="number" class="form-control" id="txtno" name="txtno" required>
             </div>
           </div>
           <div class="col-12" style="padding: 12px;">
