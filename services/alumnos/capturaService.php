@@ -1,5 +1,5 @@
 <?php
-require_once "/wamp64/www/SCC/dao/alumnos/capturaDAO.php";
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/dao/alumnos/capturaDAO.php");
 
 function insertarAlumno($alumno)
 {

@@ -1,5 +1,5 @@
 <?php
-require_once '/wamp64/www/SCC/conexiones/mysql_conexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/SCC/conexiones/mysql_conexion.php');
 
 function loginDAO($IdUsuario, $Password)
 {
@@ -55,9 +55,11 @@ function insertarAlumnoDAO($alumno)
             $sql= "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " .  
             "VALUES (" . $alumno["grado"].",".$idAlumno.",".$alumno["numLista"].",1,1,now(),NULL,NULL)";
 
+            echo $sql;
+            
             $result = $conn -> query($sql);
 
-            echo $sql;
+            
             
         } catch(Exception $e){
             echo 'Excepcion capturada: ', $e->getMessage(), "\n";

@@ -4,7 +4,7 @@ function getConnection()
     $conexion = NULL;
 
     try {
-        echo 'conexion';
+       // echo 'conexion';
         
         if (!defined("DB_SERVER")) {
             define('DB_SERVER', 'localhost:3306');
@@ -15,7 +15,7 @@ function getConnection()
         }
 
         if (!defined("DB_PASSWORD")) {
-            define('DB_PASSWORD', '');
+            define('DB_PASSWORD', 'P@ssword34');
         }
 
         if (!defined("DB_DATABASE")) {

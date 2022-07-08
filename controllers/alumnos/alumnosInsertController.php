@@ -1,5 +1,5 @@
 <?php
-require_once "/wamp64/www/SCC/services/alumnos/capturaService.php";
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/alumnos/capturaService.php");
 
 
 try{
@@ -29,6 +29,6 @@ if (!empty($_POST)) {
  echo $e -> getMessage();
 }
 
-//header("Location: ../../alumnos/captura.php");
-//exit();
+header("Location: ../../alumnos/lista.php");
+exit();
 ?>
