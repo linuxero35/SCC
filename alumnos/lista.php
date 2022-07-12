@@ -44,7 +44,7 @@ $gradosSelect = getGradosSelec();
             </div>
             <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/alumnos/alumnosInsertController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/alumnos/alumnosConsultaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
@@ -53,15 +53,15 @@ $gradosSelect = getGradosSelec();
 
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="text" maxlength="30" class="form-control" id="filn" name="filn" required>
+              <input type="text" maxlength="30" class="form-control" id="filn" name="filn" >
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Apellido Paterno</label>
-              <input type="text" maxlength="30" class="form-control" id="filap" name="filap" required>
+              <input type="text" maxlength="30" class="form-control" id="filap" name="filap" >
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Apellido Materno</label>
-              <input type="text" maxlength="30" class="form-control" id="filam" name="filam" placeholder="" required>
+              <input type="text" maxlength="30" class="form-control" id="filam" name="filam" placeholder="">
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
@@ -72,7 +72,7 @@ $gradosSelect = getGradosSelec();
             </div>
             <div class="col-md-12">
                 <center>
-            <button type="button" style="width: 150px;margin-top:10px;" class="btn btn-danger active" data-bs-toggle="button" aria-pressed="true">Guardar</button>
+            <button type="submit" style="width: 150px;margin-top:10px;" class="btn btn-danger active" aria-pressed="true">Guardar</button>
             </center>
         </div>
           </div>
