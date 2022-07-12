@@ -1,3 +1,7 @@
+<?php
+include_once "../services/grados/gradosService.php";
+$gradosSelect = getGradosSelec();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,6 +19,11 @@
 
         }
     </style>
+    <script>
+    function setValue(id) {
+      document.getElementById("filGrado").value = id;
+    }
+  </script>
 </head>
 
 <body>
@@ -33,10 +42,81 @@
                     <h1 style="color: white;">Alumnos</h1>
                 </center>
             </div>
+            <div class="container-fluid" style="width: 85%;">
+        <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
+        <form class="row g-3" method="post" action="/SCC/controllers/alumnos/alumnosInsertController.php">
+          <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
+
+            <div class="container">
+              <h2>Filtro Alumnos</h2>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Nombre</label>
+              <input type="text" maxlength="30" class="form-control" id="filn" name="filn" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Apellido Paterno</label>
+              <input type="text" maxlength="30" class="form-control" id="filap" name="filap" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Apellido Materno</label>
+              <input type="text" maxlength="30" class="form-control" id="filam" name="filam" placeholder="" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">Grado</label>
+              <input type="hidden" id="filGrado" name="filGrado" value="1">
+              <?php
+              echo  $gradosSelect;
+              ?>
+            </div>
+            <div class="col-md-12">
+                <center>
+            <button type="button" style="width: 150px;margin-top:10px;" class="btn btn-danger active" data-bs-toggle="button" aria-pressed="true">Guardar</button>
+            </center>
+        </div>
+          </div>
+        </form>
+        <br><br>
+        <table class="table">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">No.Lista</th>
+      <th scope="col">Nombre del alumno</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+     
+    </tr>
+  </tbody>
+</table>
+      </div>
+        
+
         </div>
     </div>
+        
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="../menu/sidebars.js"></script>
 
+
 </html>
+ 

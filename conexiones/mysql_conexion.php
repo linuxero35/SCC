@@ -15,7 +15,7 @@ function getConnection()
         }
 
         if (!defined("DB_PASSWORD")) {
-            define('DB_PASSWORD', 'P@ssword34');
+            define('DB_PASSWORD', '');
         }
 
         if (!defined("DB_DATABASE")) {
