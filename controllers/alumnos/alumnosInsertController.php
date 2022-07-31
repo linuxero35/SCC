@@ -20,7 +20,8 @@ if (!empty($_POST)) {
         "generacion" => $_POST['txtg'],
         "grado" => $_POST['idGrado'],
         "anio" => $_POST['txtan'],
-        "numLista" => $_POST['txtno']
+        "numLista" => $_POST['txtno'],
+        "sexo" => $_POST['filSexo']
     );
     print_r ($alumno);
     insertarAlumno($alumno);
@@ -29,6 +30,6 @@ if (!empty($_POST)) {
  echo $e -> getMessage();
 }
 
-header("Location: ../../alumnos/lista.php");
+header("Location: ../../alumnos/captura.php");
 exit();
 ?>

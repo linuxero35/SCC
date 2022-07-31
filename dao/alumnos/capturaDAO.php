@@ -31,8 +31,8 @@ function insertarAlumnoDAO($alumno)
     try {
         $conn = getConnection();
 
-        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " .
-        "VALUES ('" . $alumno["nombre"] . "' ,'".$alumno["apePat"]."','".$alumno["apeMat"]."','".$alumno["anio"]."',1,1,now(),NULL,NULL)";
+        $sql= "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, Sexo) " .
+        "VALUES ('" . $alumno["nombre"] . "' ,'".$alumno["apePat"]."','".$alumno["apeMat"]."','".$alumno["anio"]."',1,1,now(),NULL,NULL,'".$alumno["sexo"]."')";
 
         
         $result = $conn -> query($sql);

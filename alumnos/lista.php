@@ -1,6 +1,11 @@
 <?php
 include_once "../services/grados/gradosService.php";
 $gradosSelect = getGradosSelec();
+session_start();
+if (isset($_SESSION["listaAlumnos"])){
+$alumnos = $_SESSION["listaAlumnos"];
+}
+//print_r($alumnos);
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,8 +25,46 @@ $gradosSelect = getGradosSelec();
         }
     </style>
     <script>
-    function setValue(id) {
-      document.getElementById("filGrado").value = id;
+    function setSexo(value) {
+      var sexo = '';
+      if (value=='0'){
+        sexo = ''
+      }
+      else if (value == '1'){
+        sexo = 'M'
+      }
+      else if (value == '2'){
+        sexo = 'F'
+      }
+      
+      document.getElementById("filSexo").value = sexo;
+    }
+    function setValue(value) {
+      
+      if(value == "0"){
+        value = 0
+      } else if(value == "1"){
+        value = 1
+      } else if(value == "2"){
+        value = 2
+      } else if(value == "3"){
+        value = 3
+      }
+
+      document.getElementById("filGrado").value = value;
+    }
+
+    function setActivo(value) {
+
+      if(value == "0"){
+        value = -1
+      } else if(value == "1"){
+        value = 1
+      } else if(value == "2"){
+        value = 0
+      }
+
+      document.getElementById("filActivo").value = value;
     }
   </script>
 </head>
@@ -65,46 +108,75 @@ $gradosSelect = getGradosSelec();
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
-              <input type="hidden" id="filGrado" name="filGrado" value="1">
+              <input type="hidden" id="filGrado" name="filGrado" value="0">
               <?php
               echo  $gradosSelect;
               ?>
             </div>
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">Estado</label>
+              <input type="hidden" id="filActivo" name="filActivo" value="-1">
+              <select class="form-select" id="activo" name="activo" onchange="setActivo(this.selectedIndex)">
+              <option value="0">Todos</option>
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
+              </select>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">Sexo</label>
+              <input type="hidden" id="filSexo" name="filSexo" value="">
+              <select class="form-select" id="sexo" name="sexo" onchange="setSexo(this.selectedIndex)">
+              <option value="0">Todos</option>
+              <option value="1">Masculino</option>
+              <option value="2">Femenimo</option>
+              </select>
+            </div>
             <div class="col-md-12">
                 <center>
-            <button type="submit" style="width: 150px;margin-top:10px;" class="btn btn-danger active" aria-pressed="true">Guardar</button>
+            <button type="submit" style="width: 150px;margin-top:33px;" class="btn btn-danger active" aria-pressed="true">Buscar</button>
             </center>
         </div>
-          </div>
+          
         </form>
         <br><br>
         <table class="table">
   <thead class="table-secondary">
     <tr>
-      <th scope="col">No.Lista</th>
+      <th style='text-align: center;' scope="col">No.Lista</th>
       <th scope="col">Nombre del alumno</th>
-      <th scope="col">Acciones</th>
+      <th style='text-align: center;' scope="col">Sexo</th>
+      <th style='text-align: center;' scope="col">Grado</th>
+      <th style='text-align: center;' scope="col">Estado</th>
+      <th style='text-align: center;' scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-     
-    </tr>
+  <?php
+  if (isset($_SESSION["listaAlumnos"]))
+  {
+  foreach($alumnos as $alumno){
+    $sexo = $alumno['sexo'];
+    $imagen = "../imagenes/editar-hombre.png";
+    if($sexo == 'F'){
+      $imagen = "../imagenes/editar-mujer.png";
+    }
+    echo " <tr>
+    <th scope='row' style='text-align: center;'>".$alumno['noLista']."</th>
+    <td >".$alumno['nombre']. " ".$alumno['apePat']." ".$alumno['apeMat']."</td>
+    <td style='text-align: center;' >".$alumno['sexo']."</td>
+    <td style='text-align: center;' >".$alumno['grado']."</td>
+    <td style='text-align: center;' >".$alumno['activo']."</td>
+    <td style='text-align: center;'><img style='cursor:pointer;' src='".$imagen."' alt='editar'> </td>
+    
+  </tr>";
+   
+  }
+  unset($_SESSION["listaAlumnos"]);
+}
+  ?>
+   
+ 
   </tbody>
 </table>
       </div>

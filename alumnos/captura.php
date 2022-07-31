@@ -1,6 +1,6 @@
 <?php
 require_once '../services/grados/gradosService.php';
-$gradosSelect = getGradosSelec();
+$gradosSelect = getGradosSelecRequired();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,17 @@ $gradosSelect = getGradosSelec();
   <script>
     function setValue(id) {
       document.getElementById("idGrado").value = id;
+    }
+    function setSexo(value) {
+      var sexo = '';
+      if (value=='0'){
+        sexo = 'M'
+      }
+      else if (value == '1'){
+        sexo = 'F'
+      }
+      
+      document.getElementById("filSexo").value = sexo;
     }
   </script>
 </head>
@@ -93,7 +104,17 @@ $gradosSelect = getGradosSelec();
               <label for="inputCity" class="form-label">No.Lista</label>
               <input type="number" class="form-control" id="txtno" name="txtno" required>
             </div>
-          </div>
+          
+         
+          <div>
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">Sexo</label>
+              <input type="hidden" id="filSexo" name="filSexo" value="M">
+              <select class="form-select" id="sexo" name="sexo" required onchange="setSexo(this.selectedIndex)">
+              <option>Masculino</option>
+              <option >Femenimo</option>
+              </select>
+            </div>
           <div class="col-12" style="padding: 12px;">
             <center>
               <div style="display: flex;" class="center">

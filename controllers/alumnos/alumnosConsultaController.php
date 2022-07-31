@@ -1,20 +1,29 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/alumnos/consultaService.php");
+
 
 try {
     if (!empty($_POST)) {
 
-        $alumno = array(
+        $filtro = array(
             "nombre" => $_POST['filn'],
             "apePat" => $_POST['filap'],
             "apeMat" => $_POST['filam'],
-            "Grado" => $_POST['filGrado']
+            "grado" => $_POST['filGrado'],
+            "activo" => $_POST['filActivo'],
+             "sexo" => $_POST['filSexo']
         );
+
+      consultaAlumnos($filtro);
+      print_r($filtro);
     }
 
-    print_r($alumno);
+    
 } catch (Exception $e) {
     echo $e->getMessage();
 }
 header("Location: ../../alumnos/lista.php");
 exit();
+
+
 ?>
