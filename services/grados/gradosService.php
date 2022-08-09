@@ -33,7 +33,7 @@ function getGradosSelect()
     return $select;
 }
 
-function getGradosSelecRequired()
+function getGradosSelecRequired($idSelect)
 {
     $select = '<select id="txtgr" onchange="setValue(this.selectedIndex);" required name="txtgr" class="form-select">';
     $registros = consultaGrados();
@@ -41,7 +41,7 @@ function getGradosSelecRequired()
     $select = $select . '<option id="0" value = "">Todos</option>';
     while ($contador < count($registros)) {
         $registro = $registros[$contador];
-        $select = $select . '<option id="' .$registro[0][0].  '">' . $registro[0][1] . '</option>';
+        $select = $select . '<option id="' .$registro[0][0].  '" ' . ($idSelect == $registro[0][0] ? "selected" : "") . '>' . $registro[0][1] . '</option>';
         $contador = $contador + 1;
     }
 

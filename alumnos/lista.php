@@ -167,7 +167,7 @@ $alumnos = $_SESSION["listaAlumnos"];
     <td style='text-align: center;' >".$alumno['sexo']."</td>
     <td style='text-align: center;' >".$alumno['grado']."</td>
     <td style='text-align: center;' >".$alumno['activo']."</td>
-    <td style='text-align: center;'><img style='cursor:pointer;' src='".$imagen."' alt='editar'> </td>
+    <td style='text-align: center;'><a href='../controllers/alumnos/alumnosEditarController.php?IdAlumno=".$alumno['idAlumno']."'><img style='cursor:pointer;' src='".$imagen."' alt='editar'></a> </td>
     
   </tr>";
    

@@ -70,15 +70,15 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a href="../alumnos/captura.php" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Home
+          Capturar Alumno
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="../alumnos/lista.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Dashboard
+          Buscar Alumnos
         </a>
       </li>
       <li>

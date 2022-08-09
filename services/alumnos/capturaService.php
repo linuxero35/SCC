@@ -11,4 +11,24 @@ function insertarAlumno($alumno)
         echo 'Excepción capturada: ',  $e->getMessage(), "\n"; 
     }
 }
+
+function updateAlumno($alumno)
+{
+    try{
+      $idAlumno = updateAlumnoDAO($alumno);
+      updateAlumnoGrados($alumno, $idAlumno);
+    }catch(Exception $e){
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n"; 
+    }
+}
+
+function buscarAlumno($idAlumno)
+{
+    try{
+        buscarAlumnoDAO($idAlumno);
+
+    }catch(Exception $e){
+        echo 'Excepcion capturada: ', $e->getMessage(), "\n";
+    }
+}
 ?>

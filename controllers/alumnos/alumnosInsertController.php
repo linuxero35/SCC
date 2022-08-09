@@ -21,10 +21,18 @@ if (!empty($_POST)) {
         "grado" => $_POST['idGrado'],
         "anio" => $_POST['txtan'],
         "numLista" => $_POST['txtno'],
-        "sexo" => $_POST['filSexo']
+        "sexo" => $_POST['filSexo'],
+        "idAlumno" => $_POST['idAlumno']
     );
     print_r ($alumno);
-    insertarAlumno($alumno);
+
+    if(isset($_POST['idAlumno'])) {
+      updateAlumno($alumno);
+      header("Location: ../../alumnos/lista.php");
+      exit();
+    } else  {
+      insertarAlumno($alumno);
+    }
 }
 }catch(Exception $e){
  echo $e -> getMessage();

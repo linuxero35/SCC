@@ -38,6 +38,7 @@ function consultaAlumnosDAO($filtro){
 
         $sql = "SELECT a.Nombre,".
                       "a.ApellidoPat," .
+                      "a.IdAlumno," .
                       "a.ApellidoMat, " .
                       "gr.Grado," .
                       "g.NoLista," .
@@ -66,6 +67,7 @@ function consultaAlumnosDAO($filtro){
                         "grado" => $row['Grado'],
                         "activo" => $row['Activo'],
                         "noLista" => $row['NoLista'],
+                        "idAlumno" => $row['IdAlumno'],
                         "sexo" => $row['Sexo']
                     );    
 
