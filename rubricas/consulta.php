@@ -100,6 +100,7 @@ $anioSelect = getAniosSelect();
       <th style='text-align: center;' scope="col">Porcentaje</th>
       <th style='text-align: center;' scope="col">Grado</th>
       <th style='text-align: center;' scope="col">Año</th>
+      <th style='text-align: center;' scope="col">Acciones</th>
   </thead>
   <tbody>
   <?php
@@ -115,6 +116,7 @@ $anioSelect = getAniosSelect();
     <td style='text-align: center;' >".$rubrica['porcentaje']."</td>
     <td style='text-align: center;' >".$rubrica['grado']."</td>
     <td style='text-align: center;' >".$rubrica['anio']."</td>
+    <td style='text-align: center;' > <a href='../controllers/rubrica/rubricaEditarController.php?IdRubrica=".$rubrica['idRubrica']."'a><img src='../imagenes/editar.png'></a></td>
     
   </tr>";
   } 

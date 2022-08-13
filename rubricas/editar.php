@@ -3,9 +3,14 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/periodos/periodosService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/grados/gradosService.php");
-$periodosSelect = getPeriodosSelec(0);
-$criteriosSelect = getCriterioSelec(0);
-$gradosSelect = getGradosSelect();
+session_start();
+
+if (isset($_SESSION["rubrica"])) {
+  $rubrica = $_SESSION["rubrica"];
+}
+$periodosSelect = getPeriodosSelec($rubrica['idPeriodo']);
+$criteriosSelect = getCriterioSelec($rubrica['idCriterio']);
+$gradosSelect = getGradosSelecRequired($rubrica['idGrado']);
 
 ?> 
 <!DOCTYPE html>
@@ -35,7 +40,8 @@ $gradosSelect = getGradosSelect();
     function setGrado(index){
       var list = document.getElementById("txtgr");
       var value = list.options[index].id;
-      document.getElementById("idGrados").value = value;
+      
+      document.getElementById("idGrado").value = value;
     }
     
   </script>
@@ -49,46 +55,47 @@ $gradosSelect = getGradosSelect();
     <div>
       <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura Rúbrica</h1>
+          <h1 style="color: white;">Editar Rúbrica</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
         <form class="row g-3" method="post" action="/SCC/controllers/rubrica/rubricaInsertController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
-
+            
+            <input type="hidden" value="<?php echo $rubrica['idRubrica'] ?>" name="idRubrica" id="idRubrica">
             <div class="container">
               <h2>Rúbrica</h2>
             </div>
 
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Criterio</label>
-              <input type="hidden" name="idCriterio" id="idCriterio" value="0">
+              <input type="hidden" name="idCriterio" id="idCriterio" value="<?php echo $rubrica['idCriterio'] ?>">
               <?php
               echo $criteriosSelect;
               ?>
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Porcentaje</label>
-              <input type="number" maxlength="30" class="form-control" id="txtap" name="txtap" required>
+              <input type="number" maxlength="30" class="form-control" value="<?php echo $rubrica['porcentaje'] ?>" id="txtap" name="txtap" required>
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Periodo</label>
-              <input type="hidden" name="idPeriodo" id="idPeriodo" value="0">
+              <input type="hidden" name="idPeriodo" id="idPeriodo" value="<?php echo $rubrica['idPeriodo'] ?>">
               <?php
               echo $periodosSelect;
               ?>
             </div>  
           <div class="col-md-6" >
           <label for="inputAddress" class="form-label">Grados</label>
-              <input type="hidden" name="idGrados" id="idGrados" value="">
+              <input type="hidden" name="idGrado" id="idGrado" value="<?php echo $rubrica['idGrado'] ?>">
               <?php
               echo $gradosSelect;
               ?>
           </div>
           <div class="col-md-6" >
           <label for="inputAddress" class="form-label">Año</label>
-          <input type="number" maxlength="30" class="form-control" id="txtanio" name="txtanio" required>
+          <input type="number" maxlength="30" class="form-control" id="txtanio" value="<?php echo $rubrica['anio'] ?>" name="txtanio" required>
           </div>
           <div class="col-md-6" >
         

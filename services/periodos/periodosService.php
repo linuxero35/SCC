@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/dao/periodos/periodosDAO.php");
-function getPeriodosSelec()
+function getPeriodosSelec($idPeriodo)
 {
     $select = '<select id="txtpe" onchange="setValue(this.selectedIndex);" name="txtpe" class="form-select">';
     $registros = consultaPeriodos();
@@ -9,7 +9,7 @@ function getPeriodosSelec()
     $select = $select . '<option id="0">Todos</option>';
     while ($contador < count($registros)) {
         $registro = $registros[$contador];
-        $select = $select . '<option id="' .$registro[0][0].  '">' . $registro[0][1] . '</option>';
+        $select = $select . '<option id="' .$registro[0][0].  '" '.($registro[0][0]== $idPeriodo ? 'selected' : '').'>' . $registro[0][1] . '</option>';
         $contador = $contador + 1;
     }
 

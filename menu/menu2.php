@@ -82,15 +82,15 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="../rubricas/captura.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
+          Capturar Rubrica
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="../rubricas/consulta.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
+          Buscar Rubricas
         </a>
       </li>
       <li>

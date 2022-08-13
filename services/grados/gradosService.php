@@ -35,7 +35,7 @@ function getGradosSelect()
 
 function getGradosSelecRequired($idSelect)
 {
-    $select = '<select id="txtgr" onchange="setValue(this.selectedIndex);" required name="txtgr" class="form-select">';
+    $select = '<select id="txtgr" onchange="setGrado(this.selectedIndex);" required name="txtgr" class="form-select">';
     $registros = consultaGrados();
     $contador = 0;
     $select = $select . '<option id="0" value = "">Todos</option>';
