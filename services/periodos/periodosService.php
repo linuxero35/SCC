@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/dao/periodos/periodosDAO.php");
+
 function getPeriodosSelec($idPeriodo)
 {
     $select = '<select id="txtpe" onchange="setValue(this.selectedIndex);" name="txtpe" class="form-select">';
