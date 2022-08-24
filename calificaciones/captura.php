@@ -2,9 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
 $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
+$alumnosSelect = consultaAlumnoSelect(NULL, 0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,32 @@ $gradosSelect = getGradosSelect(0);
       document.getElementById("idGrado").value = id;
     }
 
+    function setGrado(index) {
+      var list = document.getElementById("txtgr");
+      var value = list.options[index].id;
+      document.getElementById("txtIdGrado").value = value;
+      reload();
+    }
+
+    function setMateria(index) {
+      var list = document.getElementById("txtIdMateria");
+      var value = list.options[index].id;
+      document.getElementById("txtMateria").value = value;
+      
+    }
+    function setPeriodo(index) {
+      var list = document.getElementById("txtpe");
+      var value = list.options[index].id;
+      document.getElementById("txtPeriodo").value = value;
+      
+    }
+
+    function setAlumno(index) {
+      var list = document.getElementById("txtalumno");
+      var value = list.options[index].id;
+      document.getElementById("txtIdAlumno").value = value;
+    }
+
     function setSexo(value) {
       var sexo = '';
       if (value == '0') {
@@ -33,6 +61,23 @@ $gradosSelect = getGradosSelect(0);
       }
 
       document.getElementById("filSexo").value = sexo;
+    }
+  </script>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script>
+    function reload() {
+      var idGrado = document.getElementById("txtIdGrado").value;
+
+      $.ajax({
+        type: 'GET',
+        url: '../controllers/alumnos/ajaxController.php',
+        data: {
+          idGrado: idGrado
+        },
+        success: function(data) {
+          $("#containerAlumnos").html(data);
+        }
+      });
     }
   </script>
 </head>
@@ -45,50 +90,46 @@ $gradosSelect = getGradosSelect(0);
     <div>
       <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura del Alumno</h1>
+          <h1 style="color: white;">Captura de Calificaciones</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionCapturaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesCapturaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
               <h2>Captura de Calificaciones</h2>
             </div>
-
             <div class="col-md-6">
-              <label for="inputmail4" class="form-label">Calificación</label>
-              <input type="text" maxlength="30" class="form-control" id="txtCalificacion" name="txtCalificacion" required>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Materia</label>
-              <input type="hidden" maxlength="30" class="form-control" id="txtMateria" name="txtMateria" required>
+              <label for="inputAddress2" class="form-label">Grado</label>
+              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
               <?php
-                echo $materiaSelect;
+              echo $gradosSelect;
               ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress" class="form-label">Año</label>
-              <input type="text" maxlength="30" class="form-control" id="txtAnio" name="txtAnio" placeholder="" required>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
               <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
               <?php
-                echo $periodoSelect;
+              echo $periodoSelect;
+              ?>
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Materia</label>
+              <input type="hidden" maxlength="30" class="form-control" id="txtMateria" name="txtMateria" required>
+              <?php
+              echo $materiaSelect;
               ?>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="email" maxlength="45" class="form-control" id="txtIdAlumno" name="txtAlumno" placeholder="" required>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
-              <?php
-                echo $gradosSelect;
-              ?>
+              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
+              <div id="containerAlumnos">
+                <?php
+                echo $alumnosSelect;
+                ?>
+              </div>
             </div>
           </div>
           <div class="container" style="padding: 1px;"></div>

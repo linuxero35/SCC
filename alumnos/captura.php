@@ -20,6 +20,13 @@ $gradosSelect = getGradosSelecRequired(0);
       document.getElementById("idGrado").value = id;
     }
 
+    function setGrado(index) {
+      var list = document.getElementById("txtgr");
+      var value = list.options[index].id;
+      document.getElementById("idGrado").value = value;
+    
+    }
+
     function setSexo(value) {
       var sexo = '';
       if (value == '0') {

@@ -7,7 +7,7 @@ function consultaMateriasSelect($IdMateria)
         $registros = consultaMateriasDAO();
 
         if ($registros != null) {
-            $select = '<select id="txtpe" onchange="setMateria(this.selectedIndex);" name="txtpe" class="form-select">';
+            $select = '<select id="txtIdMateria" onchange="setMateria(this.selectedIndex);" name="txtIdMateria" class="form-select">';
            // $registros = consultaPeriodos();
             $contador = 0;
             $select = $select . '<option id="0">Todos</option>';

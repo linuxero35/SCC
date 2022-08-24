@@ -84,5 +84,35 @@ function consultaAlumnosDAO($filtro){
         echo $e -> getMessage();
     }
 }
-
+function consultaAlumnoDAO($filtro){
+    try {
+        $conexion = getConnection();
+ 
+        $sql = "SELECT a.IdAlumno, CONCAT(g.NoLista,' ',a.Nombre,' ',a.ApellidoPat,' ',a.ApellidoMat) AS Alumno FROM  alumnos a ".
+        "LEFT JOIN gradosalumnos g ON a.IdAlumno = g.IdAlumno ".
+        "WHERE g.IdGrado = ".$filtro['idGrado']. " ".
+        "ORDER BY g.NoLista ASC";
+        
+        $result = $conexion -> query($sql);
+        
+        $contador=0;
+        
+        if ($result != null && $result -> num_rows > 0) {
+         while ($registro = $result -> fetch_assoc()) {
+             $valores[0][0]=$registro['IdAlumno'];
+             $valores[0][1]=$registro['Alumno'];
+             $registros[$contador] = $valores;
+             $contador=$contador+1;
+         }
+        }
+        if(isset($registros)){
+            return $registros;
+        } else {
+            return null;
+        }   
+        
+    } catch(Exception $e){
+     echo 'Excepción capturada: ',  $e -> getMessage(), "\n";
+    }
+ }
 ?>

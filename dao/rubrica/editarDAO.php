@@ -32,19 +32,16 @@ function buscarRubricaDAO($idRubrica)
 }
 function updateRubricaDAO($rubrica)
 {
-    try{
+    try {
         $conn = getConnection();
-        $sql = "UPDATE rubrica SET IdCriterio = ".$rubrica['criterio'].", IdPeriodo = ".$rubrica['periodo'].", Porcentaje = ".$rubrica['porcentaje'].", IdGrado =".$rubrica['grado'].", anio= ".$rubrica['anio'].",IdUsuarioMod =1, FechaMod = now() WHERE IdRubrica = " . $rubrica['idRubrica']."";
+        $sql = "UPDATE rubrica SET IdCriterio = " . $rubrica['criterio'] . ", IdPeriodo = " . $rubrica['periodo'] . ", Porcentaje = " . $rubrica['porcentaje'] . ", IdGrado =" . $rubrica['grado'] . ", anio= " . $rubrica['anio'] . ",IdUsuarioMod =1, FechaMod = now() WHERE IdRubrica = " . $rubrica['idRubrica'] . "";
         echo $sql;
         $result = $conn->query($sql);
         return $rubrica["idRubrica"];
-    }  catch (Exception $e) {
+    } catch (Exception $e) {
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     } finally {
         $conn->close();
     }
-    
-    }
-     
-       
+}      
 ?>
