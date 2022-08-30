@@ -28,6 +28,7 @@ function capturaCalificacionesDAO($calificacion)
        // echo "Registros insertados:" . $count;
 
         //return $count > 0;
+        return  $conn->insert_id;
     } catch (Exception $e) {
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     } finally {
@@ -56,6 +57,34 @@ function consultaIdGradoAlumno($idAlumno)
         $conn->close();
     } catch (Exception $e) {
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    }
+}
+
+function capturaCalificacionesCriterioDAO($calificacioncriterio)
+{
+    try {
+        $conn = getConnection();
+
+        $sql = "insert into calificacionescriterio(IdCalificacion,IdCriterio, calificacion, IdUsuarioAlta, FechaAlta, IdUsuarioMod, FechaMod) " .
+        "values(".
+        $calificacioncriterio['IdCalificacion'] .",".
+        $calificacioncriterio['IdCriterio'] .",".
+        $calificacioncriterio['calificacion'] .",".
+        $calificacioncriterio['IdUsuarioAlta'] .",".
+        "now(), null, null)";
+       
+        echo $sql;
+        $result = $conn->query($sql);
+
+       // $count = mysqli_num_rows($result);
+
+       // echo "Registros insertados:" . $count;
+
+        //return $count > 0;
+    } catch (Exception $e) {
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    } finally {
+        $conn->close();
     }
 }
 ?>

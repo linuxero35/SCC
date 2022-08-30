@@ -22,7 +22,22 @@ try {
             // header("Location: ../../alumnos/lista.php");
             //exit();
         } else {
-            capturaCalificaciones($calificacion);
+            $idcalificacion = capturaCalificaciones($calificacion);
+
+            $count = 1;
+
+            while(isset($_POST['criterio_'.$count])){
+
+                $calificacioncriterio = array(
+                    "IdCalificacion" => $idcalificacion,
+                    "IdCriterio" => $_POST['criterio_'.$count],
+                    "calificacion" => $_POST['calificacion_'.$count],
+                    "IdUsuarioAlta" => 1
+                );
+
+                $count = $count + 1;
+                capturaCalificacionesCriterio($calificacioncriterio);
+            }
         }
     }
 } catch (Exception $e) {

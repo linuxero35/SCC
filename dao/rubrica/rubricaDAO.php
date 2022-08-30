@@ -16,4 +16,39 @@ function insertaRubricaDAO($rubrica)
         $conn->close();
     }
 }
+
+function consultaRubricasParametros($filtros)
+{
+    try {
+        $conn = getConnection();
+
+        $sql = "select r.IdRubrica," .
+                      "c.IdCriterio," .
+                      "c.criterio " .
+                 "from rubrica r " .
+            "left join criterios c ON r.IdCriterio = c.IdCriterio " .
+                "where r.IdGrado = " . $filtros['IdGrado'] . " " .
+                  "and r.idperiodo = " . $filtros['IdPeriodo'];
+
+        $result = $conn->query($sql);
+        $contador = 0;
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+               
+                $registro = array(
+                    "idRubrica" => $row['IdRubrica'],
+                    "idCriterio" => $row['IdCriterio'],
+                    "criterio" => $row['criterio']
+                );
+                
+                $registros[$contador++] = $registro;
+            }
+
+            return $registros;
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+} 
 ?>

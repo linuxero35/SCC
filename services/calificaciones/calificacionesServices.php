@@ -9,4 +9,13 @@ function capturaCalificaciones($filtro)
         echo $e->getMessage();
     }
 }
+function capturaCalificacionesCriterio($calificacioncriterio)
+    {
+        try {
+           return capturaCalificacionesCriterioDAO($calificacioncriterio);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+    }
+
 ?>

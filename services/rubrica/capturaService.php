@@ -21,11 +21,40 @@ function buscarRubricasParametros($filtros)
 
 function construirTabla($filtros) {
     try {
-        $rubricas = buscarRubricasParametros($filtros);
+        $criterio = buscarRubricasParametros($filtros);
 
+        $html = tablaHTML($criterio);
+
+        return $html;
         
      } catch (Exception $e) {
          echo 'Excepción capturada: ',  $e->getMessage(), "\n";
      }
+}
+
+function tablaHTML($criterios)
+{
+
+    $tabla = '<table style="width:100%" class="table">' .
+    '<thead class="table-dark"><tr>' .
+    '<th scope="col">Criterio</th>' .
+    '<th scope="col">Calificación</th>' .
+    '</tr></thead> <tbody>';
+
+   
+    if (is_array($criterios)) {
+       $count =  0;
+        foreach ($criterios as $criterio) {
+            $count = $count + 1;
+            $tabla .= '<tr>' .
+            '<td><input type="hidden" value="'.$criterio['idCriterio'].'" id="criterio_' .$count. '" name="criterio_' .$count. '" class="form-control">' . $criterio['criterio'] . '</td>' .
+            '<td><div class="col-sm-5"><input type="text" id="calificacion_' .$count. '" name="calificacion_' .$count. '" class="form-control" required></td>' .
+            '</div></tr>';
+        }
+    }
+
+    $tabla .= ' </tbody></table>';
+
+    return $tabla;
 }
 ?>

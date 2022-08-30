@@ -22,7 +22,7 @@ $gradosSelect = getGradosSelect();
   <link href="../menu/sidebars.css" rel="stylesheet">
 
   <script>
-    function setValue(index) {
+    function setPeriodo(index) {
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
       document.getElementById("idPeriodo").value = value;
@@ -35,7 +35,7 @@ $gradosSelect = getGradosSelect();
     function setGrado(index){
       var list = document.getElementById("txtgr");
       var value = list.options[index].id;
-      document.getElementById("idGrados").value = value;
+      document.getElementById("idGrado").value = value;
     }
     
   </script>
@@ -81,7 +81,7 @@ $gradosSelect = getGradosSelect();
             </div>  
           <div class="col-md-6" >
           <label for="inputAddress" class="form-label">Grados</label>
-              <input type="hidden" name="idGrados" id="idGrados" value="">
+              <input type="hidden" name="idGrado" id="idGrado" value="">
               <?php
               echo $gradosSelect;
               ?>

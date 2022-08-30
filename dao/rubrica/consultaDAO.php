@@ -82,34 +82,4 @@ function consultaAnio()
         echo $e->getMessage();
     }
 } 
-
-function consultaRubricasParametros($filtros)
-{
-    try {
-        $conn = getConnection();
-
-        $sql = "select r.IdRubrica," .
-                      "c.IdCriterio," .
-                      "c.criterio " .
-                 "from rubrica r " .
-            "left join criterios c ON r.IdCriterio = c.IdCriterio " .
-                "where r.IdGrado = " . $filtros['IdGrado'] . " " .
-                  "and r.idperiodo = " . $filtros['IdPeriodo'];
-
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            if ($row = $result->fetch_assoc()) {
-                $registro = array(
-                    "idRubrica" => $row['IdRubrica'],
-                    "idCriterio" => $row['IdCriterio'],
-                    "criterio" => $row['criterio']
-                );
-                return $registro;
-            }
-        }
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
-} 
 ?>

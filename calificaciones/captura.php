@@ -3,6 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.php");
 $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
@@ -43,7 +44,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0);
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
       document.getElementById("txtPeriodo").value = value;
-      
+      tabla();
     }
 
     function setAlumno(index) {
@@ -80,6 +81,26 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0);
       });
     }
   </script>
+
+  <script>
+    function tabla() {
+      var idGrado = document.getElementById("txtIdGrado").value;
+      var idPeriodo = document.getElementById("txtPeriodo").value;
+
+      $.ajax({
+        type: 'GET',
+        url: '../controllers/rubrica/ajaxController.php',
+        data: {
+          idGrado: idGrado,
+          idPeriodo: idPeriodo
+        },
+        success: function(data) {
+          $("#containerTabla").html(data);
+        }
+      });
+    }
+  </script>
+  
 </head>
 
 <body>
@@ -132,6 +153,10 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0);
               </div>
             </div>
           </div>
+          <div class="container" style="padding: 1px;"></div>
+          
+          <div id="containerTabla"></div>
+
           <div class="container" style="padding: 1px;"></div>
 
           <div class="col-12" style="padding: 12px;">
