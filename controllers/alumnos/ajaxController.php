@@ -7,7 +7,7 @@ if (isset($_GET['idGrado'])) {
     $filtro = array(
         "idGrado" => $idGrado
     );
-    $selectAlumnos = consultaAlumnoSelect($filtro, 0);
+    $selectAlumnos = consultaAlumnoSelect($filtro, 0, 'required');
     echo $selectAlumnos;
 }
 ?>

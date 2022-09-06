@@ -1,4 +1,5 @@
 <?php
+//session_start();
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/dao/rubrica/rubricaDAO.php");
 
 function insertarRubrica($rubrica)
@@ -21,9 +22,14 @@ function buscarRubricasParametros($filtros)
 
 function construirTabla($filtros) {
     try {
-        $criterio = buscarRubricasParametros($filtros);
-
-        $html = tablaHTML($criterio);
+        //print_r($_SESSION["calificacion"]);
+        //if (isset($_SESSION["calificacion"])) {
+          //  $criterio = $_SESSION["calificacionDetalle"];
+        //} else {
+                $rows = buscarRubricasParametros($filtros);
+        //}
+//print_r($criterio);
+        $html = tablaHTML($rows);
 
         return $html;
         

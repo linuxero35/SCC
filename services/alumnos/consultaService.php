@@ -10,9 +10,9 @@ function consultaAlumnos($filtro)
     }
 }
 
-function consultaAlumnoSelect($filtro, $idSelect)
+function consultaAlumnoSelect($filtro, $idSelect, $required)
 {
-    $select = '<select id="txtalumno" onchange="setAlumno(this.selectedIndex);" required name="txtalumno" class="form-select">';
+    $select = '<select id="txtalumno" onchange="setAlumno(this.selectedIndex);" '. $required .' name="txtalumno" class="form-select">';
     $registros = consultaAlumnoDAO($filtro);
     $contador = 0;
     $select = $select . '<option id="0" value = "">Todos</option>';

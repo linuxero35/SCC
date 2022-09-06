@@ -4,10 +4,17 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.php");
-$materiaSelect = consultaMateriasSelect(0);
-$periodoSelect = getPeriodosSelec(0);
-$gradosSelect = getGradosSelect(0);
-$alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
+
+if (isset($_SESSION["calificacion"])) {
+    $calificacion = $_SESSION["calificacion"];
+    $calificacionDetalle = $_SESSION["calificacionDetalle"];
+}
+
+$materiaSelect = consultaMateriasSelect($calificacion["Materia"]);
+$periodoSelect = getPeriodosSelec($calificacion["Periodo"]);
+$gradosSelect = getGradosSelecRequired($calificacion["Grado"]);
+$alumnosSelect = consultaAlumnoSelect(NULL, $calificacion["IdAlumno"], 'required');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +110,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
   
 </head>
 
-<body>
+<body onload="reload(), tabla();">
   <div style="display: flex;">
     <div>
       <?php include_once("../menu/menu2.php"); ?>
@@ -111,7 +118,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     <div>
       <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura de Calificaciones</h1>
+          <h1 style="color: white;">Edicion de Calificaciones</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
@@ -120,18 +127,19 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
-              <h2>Captura de Calificaciones</h2>
+              <h2>Edicion de Calificaciones</h2>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
+              <input type="hidden" value="<?php echo $calificacion["IdCalificacion"];?>" id="idCalificacion" name="idCalificacion">
+              <input type="hidden" maxlength="45" class="form-control" value="<?php echo $calificacion["Grado"];?>" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
               <?php
               echo $gradosSelect;
               ?>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
+              <input type="hidden" maxlength="45" class="form-control" value="<?php echo $calificacion["Periodo"];?>" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
               <?php
               echo $periodoSelect;
               ?>

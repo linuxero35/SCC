@@ -7,7 +7,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.p
 $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
-$alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
+$alumnosSelect = consultaAlumnoSelect(NULL, 0, '');
+
+if (isset($_SESSION["listaCalificaciones"])){
+  $calificaciones = $_SESSION["listaCalificaciones"];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +49,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
       document.getElementById("txtPeriodo").value = value;
-      tabla();
+     
     }
 
     function setAlumno(index) {
@@ -111,16 +116,16 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     <div>
       <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura de Calificaciones</h1>
+          <h1 style="color: white;">Consulta de Calificaciones</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesCapturaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesConsultaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
-              <h2>Captura de Calificaciones</h2>
+              <h2>Busqueda de Calificaciones</h2>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
@@ -164,11 +169,41 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
               <tr>
                 <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
                 <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                <td align="left"><button type="submit" class="btn btn-primary">Buscar</button></td>
               </tr>
             </table>
           </div>
         </form>
+        <br>
+        <table class="table">
+  <thead class="table-secondary">
+    <tr>
+      <th style='text-align: center;' scope="col">Grado</th>
+      <th scope="col">Periodo</th>
+      <th style='text-align: center;' scope="col">Materia</th>
+      <th style='text-align: center;' scope="col">Nombre del alumno</th>
+      <th style='text-align: center;' scope="col">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+        <?php
+  if (isset($_SESSION["listaCalificaciones"]))
+  {
+  foreach($calificaciones as $calificaion){
+    
+    echo " <tr>
+    <th scope='row' style='text-align: center;'>".$calificaion['Grado']."</th>
+    <td >".$calificaion['Periodo']."</td>
+    <td style='text-align: center;' >".$calificaion['Materia']."</td>
+    <td style='text-align: center;' >".$calificaion['Nombre']."</td>
+    <td style='text-align: center;'><a href='../controllers/calificaciones/calificacionesEdicionController.php?idCalificacion=".$calificaion['IdCalificacion']."'><img style='cursor:pointer;' src='../imagenes/editar.png' alt='editar'></a> </td>
+    
+  </tr>";
+   
+  }
+  unset($_SESSION["listaCalificaciones"]);
+}
+  ?>
       </div>
     </div>
 </body>
