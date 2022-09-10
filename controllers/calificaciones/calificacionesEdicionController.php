@@ -2,7 +2,11 @@
 session_start();
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/calificaciones/calificacionesServices.php");
 
-try {
+$idCalificacion = 0;
+try {  
+
+  
+
   if (!empty($_GET)) {
 
     $idCalificacion = $_GET['idCalificacion'];
@@ -14,13 +18,15 @@ try {
     $_SESSION["calificacion"] = $calificacion;
     $_SESSION["calificacionDetalle"] = $calificacionDetalle;
 
+   
     echo "controller";
     print_r($_SESSION["calificacion"]);
   }
+
 } catch (Exception $e) {
   echo $e->getMessage();
 }
-
-//header("Location: ../../calificaciones/edicion.php");
-//exit();
+echo "calificacion:".$idCalificacion;
+header("Location: ../../calificaciones/edicion.php?idCalificacion=".$idCalificacion);
+exit();
 ?>

@@ -91,13 +91,15 @@ if (isset($_SESSION["listaCalificaciones"])){
     function tabla() {
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
+      var idCalificacion = document.getElementById("").value;
 
       $.ajax({
         type: 'GET',
         url: '../controllers/rubrica/ajaxController.php',
         data: {
           idGrado: idGrado,
-          idPeriodo: idPeriodo
+          idPeriodo: idPeriodo,
+          idCalificacion: idCalificacion
         },
         success: function(data) {
           $("#containerTabla").html(data);

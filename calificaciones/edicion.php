@@ -15,6 +15,7 @@ $periodoSelect = getPeriodosSelec($calificacion["Periodo"]);
 $gradosSelect = getGradosSelecRequired($calificacion["Grado"]);
 $alumnosSelect = consultaAlumnoSelect(NULL, $calificacion["IdAlumno"], 'required');
 
+echo $_GET["idCalificacion"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +100,8 @@ $alumnosSelect = consultaAlumnoSelect(NULL, $calificacion["IdAlumno"], 'required
         url: '../controllers/rubrica/ajaxController.php',
         data: {
           idGrado: idGrado,
-          idPeriodo: idPeriodo
+          idPeriodo: idPeriodo,
+          idCalificacion: $_GET["idCalificacion"]
         },
         success: function(data) {
           $("#containerTabla").html(data);
