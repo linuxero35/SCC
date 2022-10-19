@@ -120,6 +120,7 @@ function consultaCalificacionDetalleDAO($IdCalificacion)
                       "c.IdCalificacion," .
                       "c.IdCriterio," .
                       "c.Calificacion " .
+                      "c.IdMateria " .
                  "from calificacionescriterio c " .
                 "where c.idcalificacion = " . $IdCalificacion;
 

@@ -6,8 +6,8 @@ function insertaRubricaDAO($rubrica)
 {
     try {
         $conn = getConnection();
-        $sql = "INSERT INTO rubrica(idCriterio, idPeriodo, Porcentaje, anio, IdGrado, IdUsuarioAlta, FechaAlta, IdUsuarioMod, FechaMod)" .
-        "VALUES (" . $rubrica["criterio"] ."," . $rubrica["periodo"] ."," .$rubrica["porcentaje"]. "," . $rubrica["anio"] . "," . $rubrica["grado"] . ",1,Now(),NULL,NULL)";
+        $sql = "INSERT INTO rubrica(idCriterio, idPeriodo, Porcentaje, anio, IdGrado, IdUsuarioAlta, FechaAlta, IdUsuarioMod, FechaMod, idmateria)" .
+        "VALUES (" . $rubrica["criterio"] ."," . $rubrica["periodo"] ."," .$rubrica["porcentaje"]. "," . $rubrica["anio"] . "," . $rubrica["grado"] . ",1,Now(),NULL,NULL, " .$rubrica["materia"] . ")";
         echo $sql;
         $result = $conn->query($sql);
     } catch (Exception $e) {

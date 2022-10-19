@@ -92,6 +92,7 @@ if (isset($_SESSION["listaCalificaciones"])){
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
       var idCalificacion = document.getElementById("").value;
+      var idMateria = document.getElementById("txtIdMateria").value;
 
       $.ajax({
         type: 'GET',
@@ -99,7 +100,8 @@ if (isset($_SESSION["listaCalificaciones"])){
         data: {
           idGrado: idGrado,
           idPeriodo: idPeriodo,
-          idCalificacion: idCalificacion
+          idCalificacion: idCalificacion,
+          idMateria: idMateria
         },
         success: function(data) {
           $("#containerTabla").html(data);

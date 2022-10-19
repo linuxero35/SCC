@@ -17,14 +17,16 @@ try {
             "periodo" => $_POST['idPeriodo'],
             "grado" => $_POST['idGrado'],
             "idRubrica" => $IdRubrica,
-            "anio" => $_POST['txtanio']
+            "anio" => $_POST['txtanio'],
+            "materia" => $_POST['idMateria']
         );
 
         print_r($rubrica);
 
         if (isset($_POST['idRubrica'])) {
             updateRubrica($rubrica);
-            header("Location: ../../rubricas/consulta.php");
+
+           header("Location: ../../rubricas/consulta.php");
             exit();
         } else {
             insertarRubrica($rubrica);

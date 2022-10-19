@@ -8,6 +8,7 @@ function consultaRubricaDAO($filtro)
         $conn = getConnection();
         $filGrado = '';
         $filAnio = '';
+        $filMateria = '';
 
         if ($filtro['grado'] != '') {
             $filGrado = "AND g.IdGrado =" . $filtro['grado'] . " ";
@@ -16,20 +17,26 @@ function consultaRubricaDAO($filtro)
         if ($filtro['anio'] != '') {
             $filAnio = "AND r.anio =" . $filtro['anio'] . " ";
         }
+        if ($filtro['materia'] != '') {
+            $filMateria = "AND r.idmateria =" . $filtro['materia'] . " ";
+        }
 
         $sql = "SELECT r.IdRubrica," .
                       "c.Criterio," .
                       "p.Periodo, " .
                       "r.Porcentaje, " .
                       "g.Grado, " .
-                      "r.anio " .
+                      "r.anio, " .
+                      "m.nombre AS materia " .
                  "FROM rubrica r " .
             "LEFT JOIN criterios c ON r.IdCriterio = c.IdCriterio " .
             "LEFT JOIN periodos p ON r.IdPeriodo = p.IdPeriodo " .
             "LEFT JOIN grados g ON r.IdGrado = g.IdGrado " .
+            "LEFT JOIN materias m ON r.idmateria = m.idmateria " .
                 "WHERE r.IdRubrica > 0 " .
                        $filGrado .
                        $filAnio . 
+                       $filMateria .
                        "ORDER BY r.IdRubrica ASC";
 
         $contador = 0;
@@ -46,7 +53,8 @@ function consultaRubricaDAO($filtro)
                     "periodo" => $row['Periodo'],
                     "porcentaje" => $row['Porcentaje'],
                     "grado" => $row['Grado'],
-                    "anio" => $row['anio']
+                    "anio" => $row['anio'],
+                    "materia" => $row['materia']
                 );
 
                 $registros[$contador++] = $registro;

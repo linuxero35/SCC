@@ -1,13 +1,14 @@
 <?php
-
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/periodos/periodosService.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/grados/gradosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/criterios/criteriosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 $periodosSelect = getPeriodosSelec(0);
 $criteriosSelect = getCriterioSelec(0);
 $gradosSelect = getGradosSelect();
+$materiaSelect = consultaMateriasSelect(0);
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,27 +18,36 @@ $gradosSelect = getGradosSelect();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  
+
   <link href="../css/menu.css" rel="stylesheet">
   <link href="../menu/sidebars.css" rel="stylesheet">
 
   <script>
+
+  function setMateria(index) {
+      var list = document.getElementById("txtIdMateria");
+      var value = list.options[index].id;
+      document.getElementById("idMateria").value = value;
+      
+    }
+
     function setPeriodo(index) {
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
       document.getElementById("idPeriodo").value = value;
     }
-    function setCriterio(index){
+
+    function setCriterio(index) {
       var list = document.getElementById("txtcr");
       var value = list.options[index].id;
       document.getElementById("idCriterio").value = value;
     }
-    function setGrado(index){
+
+    function setGrado(index) {
       var list = document.getElementById("txtgr");
       var value = list.options[index].id;
       document.getElementById("idGrado").value = value;
     }
-    
   </script>
 </head>
 
@@ -78,36 +88,41 @@ $gradosSelect = getGradosSelect();
               <?php
               echo $periodosSelect;
               ?>
-            </div>  
-          <div class="col-md-6" >
-          <label for="inputAddress" class="form-label">Grados</label>
+            </div>
+            <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Grados</label>
               <input type="hidden" name="idGrado" id="idGrado" value="">
               <?php
               echo $gradosSelect;
               ?>
-          </div>
-          <div class="col-md-6" >
-          <label for="inputAddress" class="form-label">Año</label>
-          <input type="number" maxlength="30" class="form-control" id="txtanio" name="txtanio" required>
-          </div>
-          <div class="col-md-6" >
-        
-          </div>
-          <div class="col-md-12" >
-         
-        <table width="100%">
-        <tr>
-        <td width="49%" align="right"><button style="width: 120px;" type="submit" class="btn btn-danger">Cancelar</button></td>
-        <td width="2%"></td>
-        <td width="49%" align="left"><button style="width: 120px;" type="submit" class="btn btn-primary">Guardar</button></td>
-        </tr>
-        </table>
-          
-          </div>
+            </div>
+            <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Año</label>
+              <input type="number" maxlength="30" class="form-control" id="txtanio" name="txtanio" required>
+            </div>
+            <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Materia</label>
+              <input type="hidden" name="idMateria" id="idMateria" value="">
+              <?php
+              echo $materiaSelect;
+              ?>
+            </div>
+            <div class="col-md-12">
+
+              <table width="100%">
+                <tr>
+                  <td width="49%" align="right"><button style="width: 120px;" type="submit" class="btn btn-danger">Cancelar</button></td>
+                  <td width="2%"></td>
+                  <td width="49%" align="left"><button style="width: 120px;" type="submit" class="btn btn-primary">Guardar</button></td>
+                </tr>
+              </table>
+
+            </div>
         </form>
       </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="../menu/sidebars.js"></script>
+
 </html>

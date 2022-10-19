@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/rubrica/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/grados/gradosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
 //session_start();
 
 if (isset($_SESSION["consultaRubrica"])) {
@@ -10,6 +11,7 @@ if (isset($_SESSION["consultaRubrica"])) {
 //print_r($rubrica);
 $gradosSelect = getGradosSelect();
 $anioSelect = getAniosSelect();
+$materiaSelect = consultaMateriasSelect(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +31,12 @@ $anioSelect = getAniosSelect();
         }
     </style>
     <script>
+    function setMateria(index) {
+      var list = document.getElementById("txtIdMateria");
+      var value = list.options[index].id;
+      document.getElementById("idMateria").value = value;
+      
+    }
     function setGrado(index) {
       var list = document.getElementById("txtgr");
       var value = list.options[index].id;
@@ -83,6 +91,13 @@ $anioSelect = getAniosSelect();
               echo $anioSelect;
               ?>
             </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Materia</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idMateria" name="idMateria" >
+              <?php
+              echo $materiaSelect;
+              ?>
+            </div>
             <div class="col-md-12">
                 <center>
             <button type="submit" style="width: 150px;margin-top:33px;" class="btn btn-danger active" aria-pressed="true">Buscar</button>
@@ -100,7 +115,9 @@ $anioSelect = getAniosSelect();
       <th style='text-align: center;' scope="col">Porcentaje</th>
       <th style='text-align: center;' scope="col">Grado</th>
       <th style='text-align: center;' scope="col">Año</th>
+      <th style='text-align: center;' scope="col">Materia</th>
       <th style='text-align: center;' scope="col">Acciones</th>
+      
   </thead>
   <tbody>
   <?php
@@ -116,6 +133,7 @@ $anioSelect = getAniosSelect();
     <td style='text-align: center;' >".$rubrica['porcentaje']."</td>
     <td style='text-align: center;' >".$rubrica['grado']."</td>
     <td style='text-align: center;' >".$rubrica['anio']."</td>
+    <td style='text-align: center;' >".$rubrica['materia']."</td>
     <td style='text-align: center;' > <a href='../controllers/rubrica/rubricaEditarController.php?IdRubrica=".$rubrica['idRubrica']."'a><img src='../imagenes/editar.png'></a></td>
     
   </tr>";

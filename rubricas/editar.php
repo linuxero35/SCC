@@ -2,6 +2,7 @@
 
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/periodos/periodosService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/grados/gradosService.php");
 session_start();
 
@@ -11,6 +12,7 @@ if (isset($_SESSION["rubrica"])) {
 $periodosSelect = getPeriodosSelec($rubrica['idPeriodo']);
 $criteriosSelect = getCriterioSelec($rubrica['idCriterio']);
 $gradosSelect = getGradosSelecRequired($rubrica['idGrado']);
+$materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
 
 ?> 
 <!DOCTYPE html>
@@ -43,6 +45,13 @@ $gradosSelect = getGradosSelecRequired($rubrica['idGrado']);
       
       document.getElementById("idGrado").value = value;
     }
+    function setMateria(index) {
+      var list = document.getElementById("txtIdMateria");
+      var value = list.options[index].id;
+      document.getElementById("idMateria").value = value;
+      
+    }
+
     
   </script>
 </head>
@@ -97,10 +106,13 @@ $gradosSelect = getGradosSelecRequired($rubrica['idGrado']);
           <label for="inputAddress" class="form-label">Año</label>
           <input type="number" maxlength="30" class="form-control" id="txtanio" value="<?php echo $rubrica['anio'] ?>" name="txtanio" required>
           </div>
-          <div class="col-md-6" >
-        
-          </div>
-          <div class="col-md-12" >
+          <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Materia</label>
+              <input type="hidden" name="idMateria" id="idMateria" value="">
+              <?php
+              echo $materiaSelect;
+              ?>
+            </div>
          
         <table width="100%">
         <tr>
