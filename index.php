@@ -41,7 +41,7 @@
                                 <span class="input-icon"><i class="fa fa-lock"></i></span>
                                 <input class="form-control" id="Password" name="Password" type="password" placeholder="Contraseña" />
                             </div>
-                            <button class="btn signin">Ingresar</button>
+                            <button class="btn signin" style="background-color: darkgreen;">Ingresar</button>
                             <span class="forgot-pass"><a href="#">Olvido Usuario/Contraseña?</a></span>
                         </form>
                     </div>

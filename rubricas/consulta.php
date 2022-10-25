@@ -63,9 +63,9 @@ $materiaSelect = consultaMateriasSelect(0);
             </center>
         </div>
         <div style="width: 100%;">
-            <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+            <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
                 <center>
-                    <h1 style="color: white;">Rubrica</h1>
+                    <h1 style="color: white;">Rúbrica</h1>
                 </center>
             </div>
             <div class="container-fluid" style="width: 85%;">
@@ -74,7 +74,7 @@ $materiaSelect = consultaMateriasSelect(0);
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
-              <h2>Filtro rubrica</h2>
+              <h2>Filtro rúbrica</h2>
             </div>
 
             <div class="col-md-6" >

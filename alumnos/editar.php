@@ -52,7 +52,7 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
       <?php include_once("../menu/menu2.php"); ?>
     </div>
     <div>
-      <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+      <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
           <h1 style="color: white;">Editar Alumno</h1>
         </center>

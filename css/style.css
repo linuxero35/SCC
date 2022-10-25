@@ -1,11 +1,11 @@
 .demo{ background-color: #f5f5f5; }
 
 .form-container{
-    background: linear-gradient(blue,#29058b);
+    background: linear-gradient(green,#203500);
     font-family: 'Roboto', sans-serif;
     font-size: 0;
     padding: 0 15px;
-    border: 1px solid blue;
+    border: 1px solid rgb(82, 133, 82);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }

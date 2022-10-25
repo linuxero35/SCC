@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valido=login($IdUsuario, $Password);
     if($valido){
 
-    header("Location: ../menu/menu.php");
+    header("Location: ../home.php");
     exit();
     }
 

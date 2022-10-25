@@ -57,7 +57,7 @@ $materiaSelect = consultaMateriasSelect(0);
       <?php include_once("../menu/menu2.php"); ?>
     </div>
     <div>
-      <div class="container bg-primary" style="width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+      <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
           <h1 style="color: white;">Captura Rúbrica</h1>
         </center>
@@ -120,6 +120,9 @@ $materiaSelect = consultaMateriasSelect(0);
             </div>
         </form>
       </div>
+    </div>
+    <div>
+      <?php include_once("../footer.php"); ?>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
