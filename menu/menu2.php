@@ -128,6 +128,38 @@
           </a>
         </li>
         <li>
+          <a href="../calificaciones/calificacionesAlumnos.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Calificaciones del alumno
+          </a>
+        </li>
+        <li>
+          <a href="../criterios/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Criterios
+          </a>
+        </li>
+        <li>
+          <a href="../criterios/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Consulta Criterios
+          </a>
+        </li>
+        <li>
+        <li>
+          <a href="../criterios/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Criterios
+          </a>
+        </li>
           <a href="../index.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use xlink:href="#people-circle" />

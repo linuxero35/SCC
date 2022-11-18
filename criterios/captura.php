@@ -114,46 +114,16 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     <div>
       <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura de Calificaciones</h1>
+          <h1 style="color: white;">Captura Criterios</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
         <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesCapturaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
-
-            <div class="container">
-              <h2 style="color:white;">Captura de Calificaciones</h2>
-            </div>
             <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
-              <?php
-              echo $gradosSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Periodo</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
-              <?php
-              echo $periodoSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Materia</label>
-              <input type="hidden" maxlength="30" class="form-control" id="txtMateria" name="txtMateria" required>
-              <?php
-              echo $materiaSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
-              <div id="containerAlumnos">
-                <?php
-                echo $alumnosSelect;
-                ?>
-              </div>
+              <label for="inputAddress2" class="form-label">Criterio</label>
+              <input type="text" maxlength="45" class="form-control" id="txtIdCriterio" name="txtIdCriterio" placeholder="" required>
             </div>
           </div>
           <div class="container" style="padding: 1px;"></div>
@@ -165,9 +135,9 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           <div class="col-12" style="padding: 12px;">
             <table style="width: 100%;">
               <tr>
-                <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+              <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
                 <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
               </tr>
             </table>
           </div>

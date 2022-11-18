@@ -4,10 +4,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.php");
-$materiaSelect = consultaMateriasSelect(0);
-$periodoSelect = getPeriodosSelec(0);
-$gradosSelect = getGradosSelect(0);
-$alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
+
+if (isset($_SESSION["calificacion"])) {
+    $calificacion = $_SESSION["calificacion"];
+    $calificacionDetalle = $_SESSION["calificacionDetalle"];
+}
+
+$materiaSelect = consultaMateriasSelect($calificacion["Materia"]);
+$periodoSelect = getPeriodosSelec($calificacion["Periodo"]);
+$gradosSelect = getGradosSelecRequired($calificacion["Grado"]);
+$alumnosSelect = consultaAlumnoSelect(NULL, $calificacion["IdAlumno"], 'required');
+
+echo $_GET["idCalificacion"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +46,8 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       var list = document.getElementById("txtIdMateria");
       var value = list.options[index].id;
       document.getElementById("txtMateria").value = value;
-
+      
     }
-
     function setPeriodo(index) {
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
@@ -87,7 +94,6 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     function tabla() {
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
-      var idMateria = document.getElementById("txtIdMateria").value;
 
       $.ajax({
         type: 'GET',
@@ -95,7 +101,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
         data: {
           idGrado: idGrado,
           idPeriodo: idPeriodo,
-          idMateria: idMateria
+          idCalificacion: $_GET["idCalificacion"]
         },
         success: function(data) {
           $("#containerTabla").html(data);
@@ -103,18 +109,18 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       });
     }
   </script>
-
+  
 </head>
 
-<body>
+<body onload="reload(), tabla();">
   <div style="display: flex;">
     <div>
       <?php include_once("../menu/menu2.php"); ?>
     </div>
     <div>
-      <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+      <div class="container" style="wbackground-color:#007b00; idth: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura de Calificaciones</h1>
+          <h1 style="color: white;">Edicion de Calificaciones</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
@@ -123,18 +129,19 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
-              <h2 style="color:white;">Captura de Calificaciones</h2>
+              <h2>Edicion de Calificaciones</h2>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
+              <input type="hidden" value="<?php echo $calificacion["IdCalificacion"];?>" id="idCalificacion" name="idCalificacion">
+              <input type="hidden" maxlength="45" class="form-control" value="<?php echo $calificacion["Grado"];?>" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
               <?php
               echo $gradosSelect;
               ?>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
+              <input type="hidden" maxlength="45" class="form-control" value="<?php echo $calificacion["Periodo"];?>" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
               <?php
               echo $periodoSelect;
               ?>
@@ -157,7 +164,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
             </div>
           </div>
           <div class="container" style="padding: 1px;"></div>
-
+          
           <div id="containerTabla"></div>
 
           <div class="container" style="padding: 1px;"></div>
@@ -173,42 +180,6 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           </div>
         </form>
       </div>
-
-      <footer class="d-flex flex-wrap justify-content-between py-3 my-4 border-top" style="box-shadow: rgb(136 165 191 / 48%) 6px 2px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px; border-radius: 5px; padding: 10px; margin-right: 90px; margin-left: 76px;">
-
-        <div class="col-md-10
-       d-flex">
-
-        </div>
-
-        <div class="col-md-10 d-flex">
-          <span class="text-muted">Telebachillerato Comunitario N° 203 de Tejupilco</span>
-        </div>
-
-        <div class="col-md-10 d-flex">
-          <span class="text-muted">Domicilio conocido, S/N, Col.Calvario, CP.51400.</span>
-        </div>
-
-        <div class="col-md-10 d-flex">
-          <span class="text-muted">Teléfono: 7223965089</span>
-        </div>
-
-        <div class="col-md-8 d-flex">
-          <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@ gmail.com</span>
-        </div>
-
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                <use xlink:href="#twitter" />
-              </svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                <use xlink:href="#instagram" />
-              </svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="www.google.com"><svg class="bi" width="24" height="24">
-                <use xlink:href="#facebook" />
-              </svg></a></li>
-        </ul>
-      </footer>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

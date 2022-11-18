@@ -87,15 +87,13 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     function tabla() {
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
-      var idMateria = document.getElementById("txtIdMateria").value;
 
       $.ajax({
         type: 'GET',
         url: '../controllers/rubrica/ajaxController.php',
         data: {
           idGrado: idGrado,
-          idPeriodo: idPeriodo,
-          idMateria: idMateria
+          idPeriodo: idPeriodo
         },
         success: function(data) {
           $("#containerTabla").html(data);
@@ -107,73 +105,60 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
 </head>
 
 <body>
-  <div style="display: flex;">
+
+<div style="display: flex;">
     <div>
       <?php include_once("../menu/menu2.php"); ?>
     </div>
-    <div>
+        <div>
       <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura de Calificaciones</h1>
+          <h1 style="color: white;">Telebachillerato Comunitario N° 203 de Tejupilco</h1>
         </center>
       </div>
-      <div class="container-fluid" style="width: 85%;">
-        <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesCapturaController.php">
-          <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
-
-            <div class="container">
-              <h2 style="color:white;">Captura de Calificaciones</h2>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
-              <?php
-              echo $gradosSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Periodo</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
-              <?php
-              echo $periodoSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Materia</label>
-              <input type="hidden" maxlength="30" class="form-control" id="txtMateria" name="txtMateria" required>
-              <?php
-              echo $materiaSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
-              <div id="containerAlumnos">
-                <?php
-                echo $alumnosSelect;
-                ?>
-              </div>
-            </div>
-          </div>
-          <div class="container" style="padding: 1px;"></div>
-
-          <div id="containerTabla"></div>
-
-          <div class="container" style="padding: 1px;"></div>
-
-          <div class="col-12" style="padding: 12px;">
-            <table style="width: 100%;">
-              <tr>
-                <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
-                <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
-              </tr>
-            </table>
-          </div>
-        </form>
+      <div>
+      <br>
+      <center>
+      <table style="border: 2px solid white; ">
+      <thead>
+      <tr>
+      <th rowspan ="3" style="background-color:#5B9BD5; color:white; font-weight: normal; border-top: 2px solid gray; border-bottom: 2px solid gray; border-left: 2px solid gray; padding:10px;">Materia</th>
+      <th style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; text-align: center; border-top: 2px solid gray; padding:10px; font-weight: bold; font-size: 17px;" colspan="8" >Evaluaciones del Ciclo Escolar 2021 - 2022</th>
+      <th rowspan ="3" style="background-color:#1F4E78; color:white; font-weight: normal; border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; padding:10px; font-weight: bold;">Promedio Final</th>
+      </tr>
+      <tr>
+      <th style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; padding-left:5px; padding-right:5px;" colspan="3">I SEMESTRE</th>
+      <th style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; border-bottom: 2px solid gray; padding-left:10px; padding-right:10px;" rowspan="2" >Promedio Semestral</th>
+      <th style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; padding-left:5px; padding-right:5px;" colspan="3">II SEMESTRE</th>
+      <th style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; border-bottom: 2px solid gray; padding-left:10px; padding-right:10px;" rowspan="2" >Promedio Semestral</th>
+      </tr>
+      <tr>
+      <th style="border: 2px solid white; background-color:#DDEBF7; font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">1°</th>
+      <th style="border: 2px solid white; background-color:#DDEBF7; font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">2°</th>
+      <th style="border: 1px solid white; background-color:#DDEBF7; font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">3°</th>
+      <th style="border: 1px solid white; background-color:#DDEBF7; font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">4°</th>
+      <th style="border: 1px solid white; background-color:#DDEBF7; font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">5°</th>
+      <th style="border: 1px solid white; background-color:rgba(221, 235, 247); font-weight: normal; border-bottom: 2px solid gray; padding:4px; text-align: center; font-weight: bold;">6°</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+    <tr>
+      <td style="background-color:#5B9BD5; color:white; font-weight: normal; border-top: 2px solid gray; border-bottom: 2px solid gray; border-left: 2px solid gray; padding:1px;">Promedio</td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; border-bottom: 2px solid gray; padding-left:10px; padding-right:10px;"></td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border-bottom: 2px solid gray; border-top: 2px solid gray; border-left: 1px solid gray;border-right: 1px solid gray;"></td>
+      <td style="border: 2px solid white; background-color:#5B9BD5; color:white; font-weight: normal; border-bottom: 2px solid gray; padding-left:10px; padding-right:10px;"></td>
+      <td style="background-color:#1F4E78; color:white; font-weight: normal; border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; padding:1px; font-weight: bold;"></td>
+    </tr>
+  </tfoot>
+      </table>
+      </center>
       </div>
-
       <footer class="d-flex flex-wrap justify-content-between py-3 my-4 border-top" style="box-shadow: rgb(136 165 191 / 48%) 6px 2px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px; border-radius: 5px; padding: 10px; margin-right: 90px; margin-left: 76px;">
 
         <div class="col-md-10
@@ -194,7 +179,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
         </div>
 
         <div class="col-md-8 d-flex">
-          <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@ gmail.com</span>
+          <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@gmail.com</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -209,6 +194,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
               </svg></a></li>
         </ul>
       </footer>
+    </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

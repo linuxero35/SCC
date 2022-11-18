@@ -16,5 +16,8 @@ function getCriterioSelec($idCriterio)
     $select = $select . '</select>';
     return $select;
 }
-
+function getCriteriosSelec($criterio)
+{
+    consultaCriterio($criterio);
+}
 ?>

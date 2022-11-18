@@ -25,5 +25,17 @@ function consultaCriterios(){
     echo 'Excepción capturada: ',  $e -> getMessage(), "\n";
    }
 }
+function consultaCriterio($criterio){
+    try {
+        $conexion = getConnection();
+ 
+        $sql = "insert into criterios(Criterio,Activo,idUsuario,FechaAlta,IdUsuarioMod,FechaMod) value(". $criterio['criterio'] . ", 1,". $criterio['idUsuario'] . ",now(),null,null)";
+        
+        $result = $conexion -> query($sql);
+        
+    } catch(Exception $e){
+     echo 'Excepción capturada: ',  $e -> getMessage(), "\n";
+    }
+ }
 
 ?>

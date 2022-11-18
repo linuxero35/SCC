@@ -140,9 +140,9 @@ $gradosSelect = getGradosSelecRequired(0);
               <div class="col-12" style="padding: 12px;">
                 <table style="width: 100%;">
                   <tr>
-                    <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+                  <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
                     <td style="width: 10px;"></td>
-                    <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                    <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
                   </tr>
                 </table>
               </div>
