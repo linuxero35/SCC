@@ -165,9 +165,9 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           <div class="col-12" style="padding: 12px;">
             <table style="width: 100%;">
               <tr>
-                <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+              <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
                 <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
               </tr>
             </table>
           </div>
@@ -194,7 +194,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
         </div>
 
         <div class="col-md-8 d-flex">
-          <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@ gmail.com</span>
+          <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@gmail.com</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

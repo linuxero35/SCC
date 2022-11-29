@@ -87,7 +87,7 @@ $materiaSelect = consultaMateriasSelect(0);
               ?>
             </div>
             <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Año</label>
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
               <input type="hidden" maxlength="30" class="form-control" id="filan" name="filan">
               <?php
               echo $anioSelect;
@@ -112,12 +112,13 @@ $materiaSelect = consultaMateriasSelect(0);
           <thead class="table-secondary">
             <tr>
               <th style='text-align: center;' scope="col">IdRubrica</th>
-              <th style='text-align: center;' scope="col">Criterio</th>
-              <th style='text-align: center;' scope="col">Periodo</th>
-              <th style='text-align: center;' scope="col">Porcentaje</th>
               <th style='text-align: center;' scope="col">Grado</th>
-              <th style='text-align: center;' scope="col">Año</th>
+              <th style='text-align: center;' scope="col">Semestre</th>
+              <th style='text-align: center;' scope="col">Ciclo escolar</th>
+              <th style='text-align: center;' scope="col">Periodo</th>
               <th style='text-align: center;' scope="col">Materia</th>
+              <th style='text-align: center;' scope="col">Criterio</th>
+              <th style='text-align: center;' scope="col">Porcentaje</th>
               <th style='text-align: center;' scope="col">Acciones</th>
 
           </thead>
@@ -135,6 +136,7 @@ $materiaSelect = consultaMateriasSelect(0);
     <td style='text-align: center;' >" . $rubrica['grado'] . "</td>
     <td style='text-align: center;' >" . $rubrica['anio'] . "</td>
     <td style='text-align: center;' >" . $rubrica['materia'] . "</td>
+    <td style='text-align: center;' >" . $rubrica['semestre'] . "</td>
     <td style='text-align: center;' > <a href='../controllers/rubrica/rubricaEditarController.php?IdRubrica=" . $rubrica['idRubrica'] . "'a><img src='../imagenes/editar.png'></a></td>
     
   </tr>";

@@ -31,8 +31,8 @@ function insertarAlumnoDAO($alumno)
     try {
         $conn = getConnection();
 
-        $sql = "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Anio, Generacion, Correo, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, Sexo) " .
-            "VALUES ('" . $alumno["nombre"] . "' ,'" . $alumno["apePat"] . "','" . $alumno["apeMat"] . "','" . $alumno["anio"] . "','" . $alumno["generacion"] . "','" . $alumno["correo"] . "',1,1,now(),NULL,NULL,'" . $alumno["sexo"] . "')";
+        $sql = "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Correo, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, Sexo) " .
+            "VALUES ('" . $alumno["nombre"] . "' ,'" . $alumno["apePat"] . "','" . $alumno["apeMat"] . "','" . $alumno["cicloEsco"] . "','" . $alumno["correo"] . "',1,1,now(),NULL,NULL,'" . $alumno["sexo"] ."')";
 
 
         $result = $conn->query($sql);
@@ -48,7 +48,7 @@ function insertarAlumnoDAO($alumno)
 function updateAlumnoDAO($alumno){
   try{
     $conn = getConnection();
-    $sql="UPDATE alumnos SET Nombre = '" . $alumno["nombre"] . "', ApellidoPat = '" . $alumno["apePat"] . "', ApellidoMat = '" . $alumno["apeMat"] . "', Anio = '" . $alumno["anio"] . "', Generacion = '" . $alumno["generacion"] . "', correo='" . $alumno["correo"] . "', Activo = " . $alumno["activo"] . ", IdUsuarioMod = 1, FechaMod = now(), Sexo = '" . $alumno["sexo"] . "' WHERE IdAlumno = " . $alumno["idAlumno"] . "";
+    $sql="UPDATE alumnos SET Nombre = '" . $alumno["nombre"] . "', ApellidoPat = '" . $alumno["apePat"] . "', ApellidoMat = '" . $alumno["apeMat"] . "', Generacion = '" . $alumno["cicloEsco"] . "', correo='" . $alumno["correo"] . "', Activo = " . $alumno["activo"] . ", IdUsuarioMod = 1, FechaMod = now(), Sexo = '" . $alumno["sexo"] ."' WHERE IdAlumno = " . $alumno["idAlumno"] . "";
     $result = $conn->query($sql);
     return $alumno["idAlumno"];
 }  catch (Exception $e) {
@@ -64,8 +64,8 @@ function insertarAlumnoGrados($alumno, $idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod) " .
-            "VALUES (" . $alumno["grado"] . "," . $idAlumno . "," . $alumno["numLista"] . ",1,1,now(),NULL,NULL)";
+        $sql = "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, idsemestre) " .
+            "VALUES (" . $alumno["grado"] . "," . $idAlumno . "," . $alumno["numLista"] . ",1,1,now(),NULL,NULL, ".$alumno['idsemestre'] .")";
 
         echo $sql;
 
@@ -81,7 +81,7 @@ function updateAlumnoGrados($alumno, $idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "UPDATE gradosalumnos SET IdGrado = " . $alumno["grado"] . ", NoLista =" . $alumno["numLista"] . ", Activo = 1, IdUsuarioMod = 1, FechaMod = now() WHERE IdAlumno = " . $idAlumno . "";
+        $sql = "UPDATE gradosalumnos SET IdGrado = " . $alumno["grado"] . ", NoLista =" . $alumno["numLista"] . ", Activo = 1, IdUsuarioMod = 1, FechaMod = now(),idsemestre = ".$alumno['idsemestre']." WHERE IdAlumno = " . $idAlumno . "";
 
         echo $sql;
 
@@ -97,7 +97,7 @@ function buscarAlumnoDAO($idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "SELECT a.Nombre, a.ApellidoPat,a.IdAlumno, a.ApellidoMat, a.Activo, a.Generacion, a.Sexo, a.Correo, a.Anio, g.IdGrado, g.NoLista " .
+        $sql = "SELECT a.Nombre, a.ApellidoPat,a.IdAlumno, a.ApellidoMat, a.Activo, a.Generacion, a.Sexo, a.Correo,   g.IdGrado, g.NoLista, g.idsemestre " .
             "FROM alumnos a " .
             "LEFT JOIN gradosalumnos g ON a.IdAlumno = g.IdAlumno " .
             "WHERE a.IdAlumno = " . $idAlumno;
@@ -117,9 +117,10 @@ function buscarAlumnoDAO($idAlumno)
                     "activo" => $row['Activo'],
                     "noLista" => $row['NoLista'],
                     "generacion" => $row['Generacion'],
-                    "anio" => $row['Anio'],
                     "correo" => $row['Correo'],
-                    "sexo" => $row['Sexo']
+                    "sexo" => $row['Sexo'],
+                    "idsemestre" => $row['idsemestre']
+                   
                 );
             }
 

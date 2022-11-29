@@ -16,8 +16,21 @@ function getCriterioSelec($idCriterio)
     $select = $select . '</select>';
     return $select;
 }
-function getCriteriosSelec($criterio)
+function insertCriterio($criterio)
 {
-    consultaCriterio($criterio);
+    insertCriterioDAO($criterio);
+}
+
+function consultaCriterio($criterio)
+{
+    return consultaCriteriosDAO($criterio);
+}
+function updateCriterio($criterio)
+{
+    return updateCriterioDAO($criterio);
+}
+
+function buscarCriterio($IdCriterio){
+    buscarCriterioDAO($IdCriterio);
 }
 ?>

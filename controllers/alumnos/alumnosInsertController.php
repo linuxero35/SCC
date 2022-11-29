@@ -6,29 +6,32 @@ try{
 if (!empty($_POST)) {
 
     $activo = 0;
+    $idAlumno = '';
 
     if(isset($_POST['activo'])) {
       $activo = 1;
     }
-
+    if(isset($_POST['idAlumno'])) {
+      $idAlumno = $_POST['idAlumno'];
+    }
     $alumno = array(
         "nombre" => $_POST['txtn'],
         "apePat" => $_POST['txtap'],
         "apeMat" => $_POST['txtam'],
         "correo" => $_POST['txtc'],
         "activo" => $activo,
-        "generacion" => $_POST['txtg'],
+        "cicloEsco" => $_POST['txtg'],
         "grado" => $_POST['idGrado'],
-        "anio" => $_POST['txtan'],
         "numLista" => $_POST['txtno'],
         "sexo" => $_POST['filSexo'],
-        "idAlumno" => $_POST['idAlumno']
+        "idAlumno" => $idAlumno,
+        "idsemestre" => $_POST['semestre']
     );
     print_r ($alumno);
 
     if(isset($_POST['idAlumno'])) {
       updateAlumno($alumno);
-      header("Location: ../../alumnos/lista.php");
+     header("Location: ../../alumnos/lista.php");
       exit();
     } else  {
       insertarAlumno($alumno);
@@ -38,6 +41,6 @@ if (!empty($_POST)) {
  echo $e -> getMessage();
 }
 
-header("Location: ../../alumnos/captura.php");
-exit();
+ header("Location: ../../alumnos/captura.php");
+ exit();
 ?>

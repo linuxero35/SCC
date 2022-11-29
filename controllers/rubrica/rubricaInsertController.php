@@ -18,7 +18,8 @@ try {
             "grado" => $_POST['idGrado'],
             "idRubrica" => $IdRubrica,
             "anio" => $_POST['txtanio'],
-            "materia" => $_POST['idMateria']
+            "materia" => $_POST['idMateria'],
+            "semestre" => $_POST['semestre']
         );
 
         print_r($rubrica);
@@ -26,7 +27,7 @@ try {
         if (isset($_POST['idRubrica'])) {
             updateRubrica($rubrica);
 
-           header("Location: ../../rubricas/consulta.php");
+         header("Location: ../../rubricas/consulta.php");
             exit();
         } else {
             insertarRubrica($rubrica);
@@ -36,6 +37,6 @@ try {
     echo $e->getMessage();
 }
 
-header("Location: ../../rubricas/captura.php");
+ header("Location: ../../rubricas/captura.php");
 exit();
 ?>

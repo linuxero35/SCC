@@ -9,8 +9,8 @@ $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
 $alumnosSelect = consultaAlumnoSelect(NULL, 0, '');
 
-if (isset($_SESSION["listaCalificaciones"])) {
-  $calificaciones = $_SESSION["listaCalificaciones"];
+if (isset($_SESSION["listaCriterios"])) {
+  $criterios = $_SESSION["listaCriterios"];
 }
 
 ?>
@@ -80,8 +80,8 @@ if (isset($_SESSION["listaCalificaciones"])) {
         type: 'GET',
         url: '../controllers/alumnos/ajaxController.php',
         data: {
-          idGrado: idGrado, 
-          idMateria:  idMateria
+          idGrado: idGrado,
+          idMateria: idMateria
         },
         success: function(data) {
           $("#containerAlumnos").html(data);
@@ -123,91 +123,69 @@ if (isset($_SESSION["listaCalificaciones"])) {
     <div>
       <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Consulta de Calificaciones</h1>
+          <h1 style="color: white;">Consulta Criterios</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesConsultaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/criterios/consultaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
-              <h2>Busqueda de Calificaciones</h2>
+              <h2>Búsqueda de Criterios</h2>
             </div>
             <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Grado</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
-              <?php
-              echo $gradosSelect;
-              ?>
+              <label for="inputAddress2" class="form-label">Criterio</label>
+              <input type="text" maxlength="45" class="form-control" id="txtCriterio" name="txtCriterio" placeholder="" >
             </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Periodo</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
-              <?php
-              echo $periodoSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Materia</label>
-              <input type="hidden" maxlength="30" class="form-control" id="txtMateria" name="txtMateria" required>
-              <?php
-              echo $materiaSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
-              <div id="containerAlumnos">
-                <?php
-                echo $alumnosSelect;
-                ?>
+            <br>
+            <div class="col-md-6" style="padding-top: 50px;">
+              <div class="form-check">
+                <label class="form-check-label" for="gridCheck">
+                  Activo
+                </label>
+                <input type="checkbox" class="form-check-input" checked="true" id="activo" name="activo[]" >
               </div>
             </div>
-          </div>
-          <div class="container" style="padding: 1px;"></div>
 
-          <div id="containerTabla"></div>
+            <div class="container" style="padding: 1px;"></div>
 
-          <div class="container" style="padding: 1px;"></div>
+            <div id="containerTabla"></div>
 
-          <div class="col-12" style="padding: 12px;">
-            <table style="width: 100%;">
-              <tr>
-                <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
-                <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-primary">Buscar</button></td>
-              </tr>
-            </table>
-          </div>
+            <div class="container" style="padding: 1px;"></div>
+
+            <div class="col-12" style="padding: 12px;">
+              <table style="width: 100%;">
+                <tr>
+                  <td align="center"><button type="submit" class="btn btn-primary">Buscar</button></td>
+                  
+                </tr>
+              </table>
+            </div>
         </form>
         <br>
         <table class="table">
           <thead class="table-secondary">
             <tr>
-              <th style='text-align: center;' scope="col">Grado</th>
-              <th scope="col">Periodo</th>
-              <th style='text-align: center;' scope="col">Materia</th>
-              <th style='text-align: center;' scope="col">Nombre del alumno</th>
-              <th style='text-align: center;' scope="col">Accion</th>
+              <th style='text-align: center;' scope="col">Criterio</th>
+              <th scope="col">Activo</th>
+              <th style='text-align: center;' scope="col">Acción</th>
             </tr>
           </thead>
           <tbody>
 
             <?php
-            if (isset($_SESSION["listaCalificaciones"])) {
-              foreach ($calificaciones as $calificaion) {
+            if (isset($_SESSION["listaCriterios"])) {
+              foreach ($criterios as $criterio) {
 
                 echo " <tr>
-    <th scope='row' style='text-align: center;'>" . $calificaion['Grado'] . "</th>
-    <td >" . $calificaion['Periodo'] . "</td>
-    <td style='text-align: center;' >" . $calificaion['Materia'] . "</td>
-    <td style='text-align: center;' >" . $calificaion['Nombre'] . "</td>
-    <td style='text-align: center;'><a href='../controllers/calificaciones/calificacionesEdicionController.php?idCalificacion=" . $calificaion['IdCalificacion'] . "'><img style='cursor:pointer;' src='../imagenes/editar.png' alt='editar'></a> </td>
+    <th scope='row' style='text-align: center;'>" . $criterio['Criterio'] . "</th>
+    <td >" . $criterio['Activo'] . "</td>
+    <td style='text-align: center;'><a href='../controllers/criterios/editarController.php?IdCriterio=" . $criterio['IdCriterio'] . "'><img style='cursor:pointer;' src='../imagenes/editar.png' alt='editar'></a> </td>
     
   </tr>";
               }
-              unset($_SESSION["listaCalificaciones"]);
+              unset($_SESSION["listaCriterios"]);
             }
             ?>
           </tbody>

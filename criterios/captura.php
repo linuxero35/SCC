@@ -21,89 +21,6 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
 
   <link href="../css/menu.css" rel="stylesheet">
   <link href="../menu/sidebars.css" rel="stylesheet">
-
-  <script>
-    function setValue(id) {
-      document.getElementById("idGrado").value = id;
-    }
-
-    function setGrado(index) {
-      var list = document.getElementById("txtgr");
-      var value = list.options[index].id;
-      document.getElementById("txtIdGrado").value = value;
-      reload();
-    }
-
-    function setMateria(index) {
-      var list = document.getElementById("txtIdMateria");
-      var value = list.options[index].id;
-      document.getElementById("txtMateria").value = value;
-
-    }
-
-    function setPeriodo(index) {
-      var list = document.getElementById("txtpe");
-      var value = list.options[index].id;
-      document.getElementById("txtPeriodo").value = value;
-      tabla();
-    }
-
-    function setAlumno(index) {
-      var list = document.getElementById("txtalumno");
-      var value = list.options[index].id;
-      document.getElementById("txtIdAlumno").value = value;
-    }
-
-    function setSexo(value) {
-      var sexo = '';
-      if (value == '0') {
-        sexo = 'M'
-      } else if (value == '1') {
-        sexo = 'F'
-      }
-
-      document.getElementById("filSexo").value = sexo;
-    }
-  </script>
-  <script type="text/javascript" src="../js/jquery.min.js"></script>
-  <script>
-    function reload() {
-      var idGrado = document.getElementById("txtIdGrado").value;
-
-      $.ajax({
-        type: 'GET',
-        url: '../controllers/alumnos/ajaxController.php',
-        data: {
-          idGrado: idGrado
-        },
-        success: function(data) {
-          $("#containerAlumnos").html(data);
-        }
-      });
-    }
-  </script>
-
-  <script>
-    function tabla() {
-      var idGrado = document.getElementById("txtIdGrado").value;
-      var idPeriodo = document.getElementById("txtPeriodo").value;
-      var idMateria = document.getElementById("txtIdMateria").value;
-
-      $.ajax({
-        type: 'GET',
-        url: '../controllers/rubrica/ajaxController.php',
-        data: {
-          idGrado: idGrado,
-          idPeriodo: idPeriodo,
-          idMateria: idMateria
-        },
-        success: function(data) {
-          $("#containerTabla").html(data);
-        }
-      });
-    }
-  </script>
-
 </head>
 
 <body>
@@ -119,7 +36,7 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/calificaciones/calificacionesCapturaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/criterios/capturaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Criterio</label>

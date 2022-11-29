@@ -37,6 +37,12 @@ $gradosSelect = getGradosSelecRequired(0);
 
       document.getElementById("filSexo").value = sexo;
     }
+    function setSemestre(index) {
+      var list = document.getElementById("idSemestre");
+      var value = list.options[index].value;
+      document.getElementById("semestre").value = value;
+    }
+
   </script>
 </head>
 
@@ -108,7 +114,7 @@ $gradosSelect = getGradosSelecRequired(0);
             </div>
 
             <div class="col-md-6">
-              <label for="inputCity" class="form-label">Generación</label>
+              <label for="inputCity" class="form-label">Ciclo escolar</label>
               <input type="text" class="form-control" id="txtg" name="txtg" required>
             </div>
             <div class="col-md-6">
@@ -119,15 +125,21 @@ $gradosSelect = getGradosSelecRequired(0);
               ?>
             </div>
             <div class="col-md-6">
-              <label for="inputZip" class="form-label">Año</label>
-              <input type="number" class="form-control" id="txtan" name="txtan" required>
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="1">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="1">Primer semestre</option>
+            <option value="2">Segundo semestre</option>
+            <option value="3">Tercer semestre</option>
+            <option value="4">Cuarto semestre</option>
+            <option value="5">Quinto semestre</option>
+            <option value="6">Sexto semestre</option>
+            </select>
             </div>
             <div class="col-md-6">
               <label for="inputCity" class="form-label">No.Lista</label>
               <input type="number" class="form-control" id="txtno" name="txtno" required>
             </div>
-
-
             <div>
               <div class="col-md-6">
                 <label for="inputState" class="form-label">Sexo</label>

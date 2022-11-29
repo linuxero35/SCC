@@ -43,6 +43,11 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
 
       document.getElementById("filSexo").value = sexo;
     }
+    function setSemestre(index) {
+      var list = document.getElementById("idSemestre");
+      var value = list.options[index].value;
+      document.getElementById("semestre").value = value;
+    }
   </script>
 </head>
 
@@ -100,7 +105,7 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
             </div>
 
             <div class="col-md-6">
-              <label for="inputCity" class="form-label">Generación</label>
+              <label for="inputCity" class="form-label">Ciclo escolar</label>
               <input class="form-control" id="txtg" name="txtg" value="<?php echo $alumno['generacion']; ?>" required>
             </div>
             <div class="col-md-6">
@@ -111,8 +116,16 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
               ?>
             </div>
             <div class="col-md-6">
-              <label for="inputZip" class="form-label">Año</label>
-              <input type="number" class="form-control" id="txtan" name="txtan" value="<?php echo $alumno['anio']; ?>" required>
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="1">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option <?php echo $alumno['idsemestre'] == "1" ? "selected" : ""; ?> value="1">Primer semestre</option>
+            <option <?php echo $alumno['idsemestre'] == "2" ? "selected" : ""; ?> value="2">Segundo semestre</option>
+            <option <?php echo $alumno['idsemestre'] == "3" ? "selected" : ""; ?> value="3">Tercer semestre</option>
+            <option <?php echo $alumno['idsemestre'] == "4" ? "selected" : ""; ?> value="4">Cuarto semestre</option>
+            <option <?php echo $alumno['idsemestre'] == "5" ? "selected" : ""; ?> value="5">Quinto semestre</option>
+            <option <?php echo $alumno['idsemestre'] == "6" ? "selected" : ""; ?> value="6">Sexto semestre</option>
+            </select>
             </div>
             <div class="col-md-6">
               <label for="inputCity" class="form-label">No.Lista</label>
@@ -133,9 +146,9 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
               <div class="col-12" style="padding: 12px;">
                 <table style="width: 100%;">
                   <tr>
-                    <td align="right"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+                  <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
                     <td style="width: 10px;"></td>
-                    <td align="left"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                    <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
                   </tr>
                 </table>
               </div>

@@ -12,6 +12,7 @@ function consultaAlumnosDAO($filtro){
         $filApeMat = '';
         $filGrado = '';
         $filActivo = '';
+        $filSemestre = '';
 
         if ($filtro['nombre'] != '') {
             $filNombre = "AND a.Nombre LIKE  '%".$filtro['nombre']."%' ";
@@ -35,6 +36,7 @@ function consultaAlumnosDAO($filtro){
         if ($filtro['sexo'] != '') {
            $filSexo = "AND a.Sexo ='".$filtro['sexo']."' "; 
         }
+      
 
         $sql = "SELECT a.Nombre,".
                       "a.ApellidoPat," .
@@ -43,10 +45,12 @@ function consultaAlumnosDAO($filtro){
                       "gr.Grado," .
                       "g.NoLista," .
                       "a.Sexo," .
+                      "s.semestre," .
                       "CASE WHEN a.Activo = 1 THEN 'Activo' WHEN a.Activo = 0 THEN 'Baja' END AS Activo " .
                  "FROM alumnos a " .
             "LEFT JOIN gradosalumnos g ON a.IdAlumno = g.IdAlumno " .
             "LEFT JOIN grados gr ON g.IdGrado = gr.IdGrado " .
+            "LEFT JOIN semestres s ON g.idsemestre = s.idsemestre " .
                 "WHERE g.Activo IN (1,0) " .
                        $filNombre .
                        $filApePat .
@@ -68,7 +72,8 @@ function consultaAlumnosDAO($filtro){
                         "activo" => $row['Activo'],
                         "noLista" => $row['NoLista'],
                         "idAlumno" => $row['IdAlumno'],
-                        "sexo" => $row['Sexo']
+                        "sexo" => $row['Sexo'],
+                        "semestre" => $row['semestre']
                     );    
 
                     $registros[$contador++] = $registro;

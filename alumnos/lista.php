@@ -113,6 +113,18 @@ if (isset($_SESSION["listaAlumnos"])) {
               ?>
             </div>
             <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="1">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="1">Primer semestre</option>
+            <option value="2">Segundo semestre</option>
+            <option value="3">Tercer semestre</option>
+            <option value="4">Cuarto semestre</option>
+            <option value="5">Quinto semestre</option>
+            <option value="6">Sexto semestre</option>
+            </select>
+            </div>
+            <div class="col-md-6">
               <label for="inputState" class="form-label">Estado</label>
               <input type="hidden" id="filActivo" name="filActivo" value="-1">
               <select class="form-select" id="activo" name="activo" onchange="setActivo(this.selectedIndex)">
@@ -146,6 +158,7 @@ if (isset($_SESSION["listaAlumnos"])) {
               <th scope="col">Nombre del alumno</th>
               <th style='text-align: center;' scope="col">Sexo</th>
               <th style='text-align: center;' scope="col">Grado</th>
+              <th style='text-align: center;' scope="col">Semestre</th>
               <th style='text-align: center;' scope="col">Estado</th>
               <th style='text-align: center;' scope="col">Acciones</th>
             </tr>
@@ -164,6 +177,7 @@ if (isset($_SESSION["listaAlumnos"])) {
     <td >" . $alumno['nombre'] . " " . $alumno['apePat'] . " " . $alumno['apeMat'] . "</td>
     <td style='text-align: center;' >" . $alumno['sexo'] . "</td>
     <td style='text-align: center;' >" . $alumno['grado'] . "</td>
+    <td style='text-align: center;' >" . $alumno['semestre'] . "</td>
     <td style='text-align: center;' >" . $alumno['activo'] . "</td>
     <td style='text-align: center;'><a href='../controllers/alumnos/alumnosEditarController.php?IdAlumno=" . $alumno['idAlumno'] . "'><img style='cursor:pointer;' src='" . $imagen . "' alt='editar'></a> </td>
     
@@ -198,7 +212,7 @@ if (isset($_SESSION["listaAlumnos"])) {
     </div>
 
     <div class="col-md-8 d-flex">
-        <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@ gmail.com</span>
+        <span class="text-muted">Correo electrónico: 19tbtejupilcodehidalgo@gmail.com</span>
     </div>
 
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

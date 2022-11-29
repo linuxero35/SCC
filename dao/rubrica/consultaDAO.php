@@ -27,7 +27,8 @@ function consultaRubricaDAO($filtro)
                       "r.Porcentaje, " .
                       "g.Grado, " .
                       "r.anio, " .
-                      "m.nombre AS materia " .
+                      "m.nombre AS materia, " .
+                      "CASE r.semestre WHEN 0 THEN 'No especificado' WHEN 1 THEN 'Primer semestre' WHEN 2 THEN 'Segundo semestre' END AS semestre " .
                  "FROM rubrica r " .
             "LEFT JOIN criterios c ON r.IdCriterio = c.IdCriterio " .
             "LEFT JOIN periodos p ON r.IdPeriodo = p.IdPeriodo " .
@@ -54,7 +55,8 @@ function consultaRubricaDAO($filtro)
                     "porcentaje" => $row['Porcentaje'],
                     "grado" => $row['Grado'],
                     "anio" => $row['anio'],
-                    "materia" => $row['materia']
+                    "materia" => $row['materia'],
+                    "semestre" => $row['semestre']
                 );
 
                 $registros[$contador++] = $registro;
