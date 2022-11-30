@@ -142,6 +142,18 @@ if (isset($_SESSION["listaCalificaciones"])) {
               ?>
             </div>
             <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="1">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="1">Primer semestre</option>
+            <option value="2">Segundo semestre</option>
+            <option value="3">Tercer semestre</option>
+            <option value="4">Cuarto semestre</option>
+            <option value="5">Quinto semestre</option>
+            <option value="6">Sexto semestre</option>
+            </select>
+            </div>
+            <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
               <input type="hidden" maxlength="45" class="form-control" id="txtPeriodo" name="txtPeriodo" placeholder="" required>
               <?php

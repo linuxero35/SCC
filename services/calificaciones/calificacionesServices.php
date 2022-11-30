@@ -40,7 +40,7 @@ function capturaCalificacionesCriterio($calificacioncriterio)
     function consultaCalificacionDetalle($idCalificacion)
     {
         try {
-           return consultaCalificacionDAO($idCalificacion);
+           return consultaCalificacionDetalleDAO($idCalificacion);
         } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }

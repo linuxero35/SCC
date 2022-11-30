@@ -54,7 +54,7 @@ function tablaHTML($criterios)
             $count = $count + 1;
             $tabla .= '<tr>' .
             '<td><input type="hidden" value="'.$criterio['idCriterio'].'" id="criterio_' .$count. '" name="criterio_' .$count. '" class="form-control">' . $criterio['criterio'] . '</td>' .
-            '<td><div class="col-sm-5"><input type="text" id="calificacion_' .$count. '" name="calificacion_' .$count. '" class="form-control" required></td>' .
+            '<td><div class="col-sm-5"><input type="text" id="calificacion_' .$count. '" name="calificacion_' .$count. '" class="form-control" value="'.$criterio['calificacion'].'" required></td>' .
             '</div></tr>';
         }
     }

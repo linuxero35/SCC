@@ -86,7 +86,7 @@ function consultaCalificacionDAO($IdCalificacion)
             "left join gradosalumnos g on c.IdGradoAlumno = g.IdGradoAlumno " .
                 "where c.IdCalificacion = " . $IdCalificacion;
 
-                  echo $sql;
+                 
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -119,12 +119,13 @@ function consultaCalificacionDetalleDAO($IdCalificacion)
         $sql = "select c.IdCalificacionCriterio," .
                       "c.IdCalificacion," .
                       "c.IdCriterio," .
-                      "c.Calificacion " .
-                      "c.IdMateria " .
+                      "c.Calificacion, " .
+                      "cr.Criterio " .
                  "from calificacionescriterio c " .
+                 "left join criterios cr on cr.IdCriterio = c.IdCriterio " .
                 "where c.idcalificacion = " . $IdCalificacion;
 
-                  echo $sql;
+                 
         
         $contador = 0;
         $result = $conn->query($sql);
@@ -132,9 +133,10 @@ function consultaCalificacionDetalleDAO($IdCalificacion)
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $registro = array(
-                    "IdCalificacionCriterio" => $row['IdCalificacionCriterio'],
-                    "IdCalificacion" => $row['IdCalificacion'],
-                    "IdCriterio" => $row['IdCriterio'],
+                    "idCalificacionCriterio" => $row['IdCalificacionCriterio'],
+                    "idCalificacion" => $row['IdCalificacion'],
+                    "idCriterio" => $row['IdCriterio'],
+                    "criterio" => $row['Criterio'],
                     "calificacion" => $row['Calificacion']
                 );
 

@@ -13,9 +13,9 @@ if (isset($_SESSION["calificacion"])) {
 $materiaSelect = consultaMateriasSelect($calificacion["Materia"]);
 $periodoSelect = getPeriodosSelec($calificacion["Periodo"]);
 $gradosSelect = getGradosSelecRequired($calificacion["Grado"]);
-$alumnosSelect = consultaAlumnoSelect(NULL, $calificacion["IdAlumno"], 'required');
+$alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
 
-echo $_GET["idCalificacion"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,12 +76,14 @@ echo $_GET["idCalificacion"];
   <script>
     function reload() {
       var idGrado = document.getElementById("txtIdGrado").value;
+      var idAlumno = document.getElementById("txtIdAlumno").value;
 
       $.ajax({
         type: 'GET',
         url: '../controllers/alumnos/ajaxController.php',
         data: {
-          idGrado: idGrado
+          idGrado: idGrado,
+          idAlumno: idAlumno
         },
         success: function(data) {
           $("#containerAlumnos").html(data);
@@ -94,6 +96,8 @@ echo $_GET["idCalificacion"];
     function tabla() {
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
+      var idCalificacion = document.getElementById("idCalificacion").value;
+      var idMateria = document.getElementById("txtMateria").value;
 
       $.ajax({
         type: 'GET',
@@ -101,7 +105,8 @@ echo $_GET["idCalificacion"];
         data: {
           idGrado: idGrado,
           idPeriodo: idPeriodo,
-          idCalificacion: $_GET["idCalificacion"]
+          idCalificacion: idCalificacion,
+          idMateria: idMateria
         },
         success: function(data) {
           $("#containerTabla").html(data);
@@ -130,6 +135,7 @@ echo $_GET["idCalificacion"];
 
             <div class="container">
               <h2>Edicion de Calificaciones</h2>
+              
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
@@ -138,6 +144,18 @@ echo $_GET["idCalificacion"];
               <?php
               echo $gradosSelect;
               ?>
+            </div>
+            <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="1">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="1">Primer semestre</option>
+            <option value="2">Segundo semestre</option>
+            <option value="3">Tercer semestre</option>
+            <option value="4">Cuarto semestre</option>
+            <option value="5">Quinto semestre</option>
+            <option value="6">Sexto semestre</option>
+            </select>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
@@ -155,7 +173,7 @@ echo $_GET["idCalificacion"];
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
+              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" value="<?php echo $calificacion["IdAlumno"];?>" required>
               <div id="containerAlumnos">
                 <?php
                 echo $alumnosSelect;

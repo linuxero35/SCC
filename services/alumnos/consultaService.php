@@ -20,7 +20,7 @@ function consultaAlumnoSelect($filtro, $idSelect, $required)
     if (is_array($registros)) {
         while ($contador < count($registros)) {
             $registro = $registros[$contador];
-            $select = $select . '<option id="' . $registro[0][0] .  '" ' . ($idSelect == $registro[0][0] ? "selected" : "") . '>' . $registro[0][1] . '</option>';
+            $select = $select . '<option id="' . $filtro['idGrado'] .  '" ' . ($idSelect == $registro[0][0] ? "selected" : "") . '>' . $registro[0][1] . '</option>';
             $contador = $contador + 1;
         }
     }

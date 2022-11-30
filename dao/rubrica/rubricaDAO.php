@@ -30,6 +30,7 @@ function consultaRubricasParametros($filtros)
                 "where r.IdGrado = " . $filtros['IdGrado'] . " " .
                   "and r.idperiodo = " . $filtros['IdPeriodo'];
 
+                  echo $sql;
         $result = $conn->query($sql);
         $contador = 0;
 

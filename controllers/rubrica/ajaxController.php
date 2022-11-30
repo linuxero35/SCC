@@ -16,11 +16,12 @@ if (isset($_GET['idGrado'])) {
     if (isset($_GET['idCalificacion'])) {
         $idCalificacion = intval($_GET['idCalificacion']);
         $rows = consultaCalificacionDetalle($idCalificacion);
-        echo "calificaciones";
+        //echo "calificaciones";
+       // print_r($rows);
         $html = tablaHTML($rows);
     } else {
-        $html = construirTabla($filtro);
-        echo "calificaciones 2";
+        //$html = construirTabla($filtro);
+        //echo "calificaciones 2";
     }
 
     echo $html;
