@@ -1,6 +1,8 @@
 <?php
 require_once '../services/grados/gradosService.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 $gradosSelect = getGradosSelecRequired(0);
+$cicloSelect = consultaCiclosSelect(0, '');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +20,11 @@ $gradosSelect = getGradosSelecRequired(0);
   <script>
     function setValue(id) {
       document.getElementById("idGrado").value = id;
+    }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
     }
 
     function setGrado(index) {
@@ -112,11 +119,13 @@ $gradosSelect = getGradosSelecRequired(0);
             <div>
               <h2>Datos Escolares</h2>
             </div>
-
             <div class="col-md-6">
-              <label for="inputCity" class="form-label">Ciclo escolar</label>
-              <input type="text" class="form-control" id="txtg" name="txtg" required>
-            </div>
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
+              </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
               <input type="hidden" id="idGrado" name="idGrado" value="1">

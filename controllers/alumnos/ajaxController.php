@@ -4,7 +4,12 @@ require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/alumnos/consultaService.ph
 if (isset($_GET['idGrado'])) {
 
     $idGrado = intval($_GET['idGrado']);
-    $idAlumno = intval($_GET['idAlumno']);
+    if(isset($_GET['idAlumno'])){
+        $idAlumno = intval($_GET['idAlumno']);
+    }
+    else{
+        $idAlumno =0;
+    }
     $filtro = array(
         "idGrado" => $idGrado
     );

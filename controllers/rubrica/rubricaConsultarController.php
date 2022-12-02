@@ -7,8 +7,9 @@ try {
 
         $filtro = array(
             "grado" => $_POST['idGrados'],
-            "anio" => $_POST['filan'],
-            "materia" => $_POST['filMateria']
+            "idciclo" => $_POST['idciclo'],
+            "materia" => $_POST['idMateria'],
+            "semestre" => $_POST['semestre']
         );
 
       consultaRubrica($filtro);

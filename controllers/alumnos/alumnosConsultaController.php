@@ -12,7 +12,8 @@ try {
             "grado" => $_POST['filGrado'],
             "activo" => $_POST['filActivo'],
             "semestre" => $_POST['semestre'],
-             "sexo" => $_POST['filSexo']
+             "sexo" => $_POST['filSexo'],
+             "idciclo" => $_POST['idciclo']
         );
 
       consultaAlumnos($filtro);

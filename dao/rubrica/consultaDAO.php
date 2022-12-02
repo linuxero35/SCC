@@ -7,18 +7,22 @@ function consultaRubricaDAO($filtro)
     try {
         $conn = getConnection();
         $filGrado = '';
-        $filAnio = '';
+        $filCiclo = '';
         $filMateria = '';
+        $filSemestre = '';
 
         if ($filtro['grado'] != '') {
             $filGrado = "AND g.IdGrado =" . $filtro['grado'] . " ";
         }
 
-        if ($filtro['anio'] != '') {
-            $filAnio = "AND r.anio =" . $filtro['anio'] . " ";
+        if ($filtro['idciclo'] != '') {
+            $filCiclo = "AND r.idciclo =" . $filtro['idciclo'] . " ";
         }
         if ($filtro['materia'] != '') {
             $filMateria = "AND r.idmateria =" . $filtro['materia'] . " ";
+        }
+        if ($filtro['semestre'] != '' && $filtro['semestre'] != '0') {
+            $filSemestre = "AND r.semestre =" . $filtro['semestre'] . " ";
         }
 
         $sql = "SELECT r.IdRubrica," .
@@ -26,22 +30,25 @@ function consultaRubricaDAO($filtro)
                       "p.Periodo, " .
                       "r.Porcentaje, " .
                       "g.Grado, " .
-                      "r.anio, " .
+                      "cl.ciclo, " .
                       "m.nombre AS materia, " .
-                      "CASE r.semestre WHEN 0 THEN 'No especificado' WHEN 1 THEN 'Primer semestre' WHEN 2 THEN 'Segundo semestre' END AS semestre " .
+                      "s.semestre " .
                  "FROM rubrica r " .
             "LEFT JOIN criterios c ON r.IdCriterio = c.IdCriterio " .
             "LEFT JOIN periodos p ON r.IdPeriodo = p.IdPeriodo " .
             "LEFT JOIN grados g ON r.IdGrado = g.IdGrado " .
+            "LEFT JOIN ciclo cl ON r.idciclo = cl.idciclo " .
             "LEFT JOIN materias m ON r.idmateria = m.idmateria " .
+            "LEFT JOIN semestres s ON s.idsemestre = r.semestre " .
                 "WHERE r.IdRubrica > 0 " .
                        $filGrado .
-                       $filAnio . 
+                       $filCiclo . 
                        $filMateria .
+                       $filSemestre .
                        "ORDER BY r.IdRubrica ASC";
 
         $contador = 0;
-
+echo $sql;
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -54,7 +61,7 @@ function consultaRubricaDAO($filtro)
                     "periodo" => $row['Periodo'],
                     "porcentaje" => $row['Porcentaje'],
                     "grado" => $row['Grado'],
-                    "anio" => $row['anio'],
+                    "ciclo" => $row['ciclo'],
                     "materia" => $row['materia'],
                     "semestre" => $row['semestre']
                 );

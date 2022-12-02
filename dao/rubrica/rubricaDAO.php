@@ -6,8 +6,8 @@ function insertaRubricaDAO($rubrica)
 {
     try {
         $conn = getConnection();
-        $sql = "INSERT INTO rubrica(idCriterio, idPeriodo, Porcentaje, anio, IdGrado, IdUsuarioAlta, FechaAlta, IdUsuarioMod, FechaMod, idmateria,semestre)" .
-        "VALUES (" . $rubrica["criterio"] ."," . $rubrica["periodo"] ."," .$rubrica["porcentaje"]. "," . $rubrica["anio"] . "," . $rubrica["grado"] . ",1,Now(),NULL,NULL, " .$rubrica["materia"] .",". $rubrica['semestre'].")";
+        $sql = "INSERT INTO rubrica(idCriterio, idPeriodo, Porcentaje, idciclo, IdGrado, IdUsuarioAlta, FechaAlta, IdUsuarioMod, FechaMod, idmateria,semestre)" .
+        "VALUES (" . $rubrica["criterio"] .",1," .$rubrica["porcentaje"]. "," . $rubrica["idciclo"] . "," . $rubrica["grado"] . ",1,Now(),NULL,NULL, " .$rubrica["materia"] .",". $rubrica['semestre'].")";
         echo $sql;
         $result = $conn->query($sql);
     } catch (Exception $e) {
@@ -22,15 +22,37 @@ function consultaRubricasParametros($filtros)
     try {
         $conn = getConnection();
 
+        $filCiclo = '';
+        $filGrado = '';
+        $filSemestre = '';
+        $filMateria = '';
+
+        if($filtros['IdCiclo']!='' && $filtros['IdCiclo']!=0){
+            $filCiclo = 'AND r.idciclo=' . $filtros['IdCiclo'] . ' ';
+        }
+        if($filtros['IdGrado']!='' && $filtros['IdGrado']!=0){
+            $filGrado = 'AND r.idgrado=' .  $filtros['IdGrado'].' ';
+        }
+        if($filtros['IdSemestre']!='' && $filtros['IdSemestre']!=0){
+            $filSemestre = 'AND r.semestre=' .  $filtros['IdSemestre'] . ' ';
+        }
+        if($filtros['IdMateria']!='' && $filtros['IdMateria']!=0){
+            $filMateria = 'AND r.idmateria=' .  $filtros['IdMateria'] . ' ';
+        }
+
         $sql = "select r.IdRubrica," .
                       "c.IdCriterio," .
-                      "c.criterio " .
+                      "c.criterio," .
+                      "r.porcentaje " .
                  "from rubrica r " .
             "left join criterios c ON r.IdCriterio = c.IdCriterio " .
-                "where r.IdGrado = " . $filtros['IdGrado'] . " " .
-                  "and r.idperiodo = " . $filtros['IdPeriodo'];
+                "where r.IdGrado > 0 " . 
+                $filCiclo .
+                $filGrado .
+                $filSemestre .
+                $filMateria;
 
-                  echo $sql;
+               
         $result = $conn->query($sql);
         $contador = 0;
 
@@ -40,7 +62,8 @@ function consultaRubricasParametros($filtros)
                 $registro = array(
                     "idRubrica" => $row['IdRubrica'],
                     "idCriterio" => $row['IdCriterio'],
-                    "criterio" => $row['criterio']
+                    "criterio" => $row['criterio'],
+                    "porcentaje" => $row['porcentaje']
                 );
                 
                 $registros[$contador++] = $registro;
@@ -51,5 +74,4 @@ function consultaRubricasParametros($filtros)
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-} 
-?>
+}

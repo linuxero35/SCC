@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/periodos/periodosService.p
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/grados/gradosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 session_start();
 
 if (isset($_SESSION["rubrica"])) {
@@ -13,6 +14,7 @@ $periodosSelect = getPeriodosSelec($rubrica['idPeriodo']);
 $criteriosSelect = getCriterioSelec($rubrica['idCriterio']);
 $gradosSelect = getGradosSelecRequired($rubrica['idGrado']);
 $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
+$cicloSelect = consultaCiclosSelect($rubrica['idciclo'], '');
 
 ?> 
 <!DOCTYPE html>
@@ -56,7 +58,12 @@ $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
       var value = list.options[index].value;
       document.getElementById("semestre").value = value;
     }
-
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
+      alert(document.getElementById("idciclo").value)
+    }
     
   </script>
 </head>
@@ -81,6 +88,13 @@ $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
             <div class="container">
               <h2>Rúbrica</h2>
             </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo" value="<?php echo $rubrica['idciclo'] ?>">
+              <?php
+              echo $cicloSelect;
+              ?>
+            </div>
             <div class="col-md-6" >
           <label for="inputAddress" class="form-label">Grados</label>
               <input type="hidden" name="idGrado" id="idGrado" value="<?php echo $rubrica['idGrado'] ?>">
@@ -90,19 +104,16 @@ $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
           </div>
           <div class="col-md-6">
             <label for="inputAddress" class="form-label">Semestre</label><br>
-            <input type="hidden" name="semestre" id="semestre" value="<?php echo ($rubrica['semestre'] == 0 ? '1' : $rubrica['semestre']) ?>">
+            <input type="hidden" name="semestre" id="semestre" value="<?php echo $rubrica['semestre'] ?>">
             <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
             <option <?php echo  ($rubrica['semestre'] == '1' ? 'selected' : '') ?> value="1">Primer semestre</option>
             <option <?php echo  ($rubrica['semestre'] == '2' ? 'selected' : '') ?> value="2">Segundo semestre</option>
+            <option <?php echo  ($rubrica['semestre'] == '3' ? 'selected' : '') ?> value="3">Tercer semestre</option>
+            <option <?php echo  ($rubrica['semestre'] == '4' ? 'selected' : '') ?> value="4">Cuarto semestre</option>
+            <option <?php echo  ($rubrica['semestre'] == '5' ? 'selected' : '') ?> value="5">Quinto semestre</option>
+            <option <?php echo  ($rubrica['semestre'] == '6' ? 'selected' : '') ?> value="6">Sexto semestre</option>
             </select>
             </div>
-          <div class="col-md-6">
-              <label for="inputAddress" class="form-label">Periodo</label>
-              <input type="hidden" name="idPeriodo" id="idPeriodo" value="<?php echo $rubrica['idPeriodo'] ?>">
-              <?php
-              echo $periodosSelect;
-              ?>
-            </div> 
             <div class="col-md-6">
             <label for="inputAddress" class="form-label">Materia</label>
               <input type="hidden" name="idMateria" id="idMateria" value="<?php echo $rubrica['idmateria'] ?>">
@@ -110,10 +121,7 @@ $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
               echo $materiaSelect;
               ?>
             </div>
-            <div class="col-md-6" >
-          <label for="inputAddress" class="form-label">Ciclo escolar</label>
-          <input type="number" maxlength="30" class="form-control" id="txtanio" value="<?php echo $rubrica['anio'] ?>" name="txtanio" required>
-          </div>
+           
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Criterio</label>
               <input type="hidden" name="idCriterio" id="idCriterio" value="<?php echo $rubrica['idCriterio'] ?>">
@@ -125,11 +133,7 @@ $materiaSelect = consultaMateriasSelect($rubrica['idmateria']);
               <label for="inputPassword4" class="form-label">Porcentaje</label>
               <input type="number" maxlength="30" class="form-control" value="<?php echo $rubrica['porcentaje'] ?>" id="txtap" name="txtap" required>
             </div>
-            
-          
-        
-         
-            
+              
         <table width="100%">
         <tr>
         <td width="49%" align="right"><button style="width: 120px;" type="submit" class="btn btn-primary">Guardar</button></td>

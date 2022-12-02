@@ -8,7 +8,9 @@ try {
             "idGrado" => $_POST['txtIdGrado'],
             "idPeriodo" => $_POST['txtPeriodo'],
             "idMateria" => $_POST['txtMateria'],
-            "idAlumno" => $_POST['txtIdAlumno']
+            "idAlumno" => $_POST['txtIdAlumno'],
+            "idsemestre" => $_POST['semestre'],
+            "idciclo" => $_POST['idciclo']
         );
 
       $registros = consultaCalificaciones($filtros);
@@ -19,8 +21,8 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-header("Location: ../../calificaciones/consulta.php");
-exit();
+//header("Location: ../../calificaciones/consulta.php");
+//exit();
 
 
 ?>

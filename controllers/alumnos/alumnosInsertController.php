@@ -20,7 +20,7 @@ if (!empty($_POST)) {
         "apeMat" => $_POST['txtam'],
         "correo" => $_POST['txtc'],
         "activo" => $activo,
-        "cicloEsco" => $_POST['txtg'],
+        "idciclo" => $_POST['idciclo'],
         "grado" => $_POST['idGrado'],
         "numLista" => $_POST['txtno'],
         "sexo" => $_POST['filSexo'],

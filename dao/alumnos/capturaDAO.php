@@ -4,15 +4,22 @@ session_start();
 function loginDAO($IdUsuario, $Password)
 {
     try {
-        $conn = getConnection();
-        $sql = "SELECT Usuario, Nombre, ApellidoPat, ApellidoMat, Correo, Activo, FechaAlta, IdUsuarioAlta, " .
-            "FechaMod, IdUsuarioMod FROM Usuario WHERE Usuario = '" . $IdUsuario . "' AND Password= '" . $Password . "'";
+        $usuario = array(
+            "login"=>false,
+            "tipo" => 0
+        );
 
+        $conn = getConnection();
+        $sql = "SELECT Usuario, Nombre, ApellidoPat, ApellidoMat, Correo, Activo, FechaAlta, IdUsuarioAlta, idtipousuario " .
+            "FechaMod, IdUsuarioMod FROM Usuario WHERE Usuario = '" . $IdUsuario . "' AND Password= '" . $Password . "'";
+            echo $sql;
         $result = $conn->query($sql);
         $count = mysqli_num_rows($result);
         echo "Registrsos Encontrados:" . $count;
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $usuario["login"]=true;
+                $usuario["tipo"]=$row['idtipousuario'];
                 echo "Usuario: " . $row["Usuario"] . " - Nombre: " . $row["Nombre"] . " " . $row["ApellidoPat"] . "<br>";
             }
         } else {
@@ -20,11 +27,13 @@ function loginDAO($IdUsuario, $Password)
         }
 
         $conn->close();
-        return $count > 0;
+        return $usuario;
     } catch (Exception $e) {
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
 }
+
+
 
 function insertarAlumnoDAO($alumno)
 {
@@ -32,7 +41,7 @@ function insertarAlumnoDAO($alumno)
         $conn = getConnection();
 
         $sql = "INSERT INTO alumnos(Nombre, ApellidoPat, ApellidoMat, Generacion, Correo, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, Sexo) " .
-            "VALUES ('" . $alumno["nombre"] . "' ,'" . $alumno["apePat"] . "','" . $alumno["apeMat"] . "','" . $alumno["cicloEsco"] . "','" . $alumno["correo"] . "',1,1,now(),NULL,NULL,'" . $alumno["sexo"] ."')";
+            "VALUES ('" . $alumno["nombre"] . "' ,'" . $alumno["apePat"] . "','" . $alumno["apeMat"] . "','','" . $alumno["correo"] . "',1,1,now(),NULL,NULL,'" . $alumno["sexo"] ."')";
 
 
         $result = $conn->query($sql);
@@ -64,8 +73,8 @@ function insertarAlumnoGrados($alumno, $idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, idsemestre) " .
-            "VALUES (" . $alumno["grado"] . "," . $idAlumno . "," . $alumno["numLista"] . ",1,1,now(),NULL,NULL, ".$alumno['idsemestre'] .")";
+        $sql = "INSERT INTO gradosalumnos(IdGrado, IdAlumno, NoLista, Activo, IdUsuario, FechaAlta, IdUsuarioMod, FechaMod, idsemestre, idciclo) " .
+            "VALUES (" . $alumno["grado"] . "," . $idAlumno . "," . $alumno["numLista"] . ",1,1,now(),NULL,NULL, ".$alumno['idsemestre'] .",".$alumno['idciclo'].")";
 
         echo $sql;
 
@@ -81,7 +90,7 @@ function updateAlumnoGrados($alumno, $idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "UPDATE gradosalumnos SET IdGrado = " . $alumno["grado"] . ", NoLista =" . $alumno["numLista"] . ", Activo = 1, IdUsuarioMod = 1, FechaMod = now(),idsemestre = ".$alumno['idsemestre']." WHERE IdAlumno = " . $idAlumno . "";
+        $sql = "UPDATE gradosalumnos SET IdGrado = " . $alumno["grado"] . ", NoLista =" . $alumno["numLista"] . ", Activo = 1, IdUsuarioMod = 1, FechaMod = now(),idsemestre = ".$alumno['idsemestre'].", idciclo = ".$alumno['idciclo']." WHERE IdAlumno = " . $idAlumno . "";
 
         echo $sql;
 
@@ -97,7 +106,7 @@ function buscarAlumnoDAO($idAlumno)
     try {
         $conn = getConnection();
 
-        $sql = "SELECT a.Nombre, a.ApellidoPat,a.IdAlumno, a.ApellidoMat, a.Activo, a.Generacion, a.Sexo, a.Correo,   g.IdGrado, g.NoLista, g.idsemestre " .
+        $sql = "SELECT a.Nombre, a.ApellidoPat,a.IdAlumno, a.ApellidoMat, a.Activo, a.Generacion, a.Sexo, a.Correo,   g.IdGrado, g.NoLista, g.idsemestre,g.idciclo " .
             "FROM alumnos a " .
             "LEFT JOIN gradosalumnos g ON a.IdAlumno = g.IdAlumno " .
             "WHERE a.IdAlumno = " . $idAlumno;
@@ -119,7 +128,8 @@ function buscarAlumnoDAO($idAlumno)
                     "generacion" => $row['Generacion'],
                     "correo" => $row['Correo'],
                     "sexo" => $row['Sexo'],
-                    "idsemestre" => $row['idsemestre']
+                    "idsemestre" => $row['idsemestre'],
+                    "idciclo" => $row['idciclo']
                    
                 );
             }

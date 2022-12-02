@@ -96,6 +96,22 @@
           </a>
         </li>
         <li>
+          <a href="../criterios/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Criterios
+          </a>
+        </li>
+        <li>
+          <a href="../criterios/consulta.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Consulta Criterios
+          </a>
+        </li>
+        <li>
           <a href="../rubricas/captura.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use xlink:href="#table" />
@@ -128,29 +144,14 @@
           </a>
         </li>
         <li>
-          <a href="../calificaciones/calificacionesAlumnos.php" class="nav-link text-white">
+          <a href="../controllers/calificaciones/tablacalificacionesController.php?IdAlumno=2" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use xlink:href="#grid" />
             </svg>
             Calificaciones del alumno
           </a>
         </li>
-        <li>
-          <a href="../criterios/captura.php" class="nav-link text-white">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use xlink:href="#grid" />
-            </svg>
-            Captura Criterios
-          </a>
-        </li>
-        <li>
-          <a href="../criterios/consulta.php" class="nav-link text-white">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use xlink:href="#grid" />
-            </svg>
-            Consulta Criterios
-          </a>
-        </li>
+       
         <li>
           <a href="../index.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">

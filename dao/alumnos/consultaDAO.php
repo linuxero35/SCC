@@ -13,6 +13,7 @@ function consultaAlumnosDAO($filtro){
         $filGrado = '';
         $filActivo = '';
         $filSemestre = '';
+        $filCiclo = '';
 
         if ($filtro['nombre'] != '') {
             $filNombre = "AND a.Nombre LIKE  '%".$filtro['nombre']."%' ";
@@ -36,7 +37,9 @@ function consultaAlumnosDAO($filtro){
         if ($filtro['sexo'] != '') {
            $filSexo = "AND a.Sexo ='".$filtro['sexo']."' "; 
         }
-      
+        if ($filtro['idciclo'] != '') {
+            $filSexo = "AND c.idciclo ='".$filtro['idciclo']."' "; 
+         }
 
         $sql = "SELECT a.Nombre,".
                       "a.ApellidoPat," .
@@ -46,10 +49,12 @@ function consultaAlumnosDAO($filtro){
                       "g.NoLista," .
                       "a.Sexo," .
                       "s.semestre," .
+                      "c.ciclo," .
                       "CASE WHEN a.Activo = 1 THEN 'Activo' WHEN a.Activo = 0 THEN 'Baja' END AS Activo " .
                  "FROM alumnos a " .
             "LEFT JOIN gradosalumnos g ON a.IdAlumno = g.IdAlumno " .
             "LEFT JOIN grados gr ON g.IdGrado = gr.IdGrado " .
+            "LEFT JOIN ciclo c ON  g.idciclo = c.idciclo " .
             "LEFT JOIN semestres s ON g.idsemestre = s.idsemestre " .
                 "WHERE g.Activo IN (1,0) " .
                        $filNombre .
@@ -58,6 +63,7 @@ function consultaAlumnosDAO($filtro){
                        $filGrado .
                        $filActivo .
                        $filSexo .
+                       $filCiclo .
             "ORDER BY g.NoLista ";
             $contador = 0;
             $result = $conn->query($sql);
@@ -73,7 +79,8 @@ function consultaAlumnosDAO($filtro){
                         "noLista" => $row['NoLista'],
                         "idAlumno" => $row['IdAlumno'],
                         "sexo" => $row['Sexo'],
-                        "semestre" => $row['semestre']
+                        "semestre" => $row['semestre'],
+                        "ciclo" => $row['ciclo']
                     );    
 
                     $registros[$contador++] = $registro;

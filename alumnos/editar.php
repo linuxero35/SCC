@@ -1,5 +1,6 @@
 <?php
 require_once '../services/grados/gradosService.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 
 session_start();
 
@@ -7,6 +8,7 @@ if (isset($_SESSION["Alumno"])) {
   $alumno = $_SESSION["Alumno"];
 }
 $gradosSelect = getGradosSelecRequired($alumno["grado"]);
+$cicloSelect = consultaCiclosSelect($alumno["idciclo"], 'required');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +33,11 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
       var value = list.options[index].id;
       document.getElementById("idGrado").value = value;
     
+    }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
     }
 
     function setSexo(value) {
@@ -105,9 +112,12 @@ $gradosSelect = getGradosSelecRequired($alumno["grado"]);
             </div>
 
             <div class="col-md-6">
-              <label for="inputCity" class="form-label">Ciclo escolar</label>
-              <input class="form-control" id="txtg" name="txtg" value="<?php echo $alumno['generacion']; ?>" required>
-            </div>
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
+              </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
               <input type="hidden" id="idGrado" name="idGrado" value="<?php echo $alumno['grado']; ?>">

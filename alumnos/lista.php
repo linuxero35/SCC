@@ -1,6 +1,8 @@
 <?php
 include_once "../services/grados/gradosService.php";
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 $gradosSelect = getGradosSelec();
+$cicloSelect = consultaCiclosSelect(0, '');
 session_start();
 if (isset($_SESSION["listaAlumnos"])) {
   $alumnos = $_SESSION["listaAlumnos"];
@@ -65,6 +67,11 @@ if (isset($_SESSION["listaAlumnos"])) {
 
       document.getElementById("filActivo").value = value;
     }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
+    }
   </script>
 </head>
 
@@ -92,18 +99,12 @@ if (isset($_SESSION["listaAlumnos"])) {
             <div class="container">
               <h2>Filtro Alumnos</h2>
             </div>
-
             <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="text" maxlength="30" class="form-control" id="filn" name="filn">
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Apellido Paterno</label>
-              <input type="text" maxlength="30" class="form-control" id="filap" name="filap">
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress" class="form-label">Apellido Materno</label>
-              <input type="text" maxlength="30" class="form-control" id="filam" name="filam" placeholder="">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
             </div>
             <div class="col-md-6">
               <label for="inputState" class="form-label">Grado</label>
@@ -133,7 +134,6 @@ if (isset($_SESSION["listaAlumnos"])) {
                 <option value="2">Inactivo</option>
               </select>
             </div>
-
             <div class="col-md-6">
               <label for="inputState" class="form-label">Sexo</label>
               <input type="hidden" id="filSexo" name="filSexo" value="">
@@ -143,6 +143,21 @@ if (isset($_SESSION["listaAlumnos"])) {
                 <option value="2">Femenimo</option>
               </select>
             </div>
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Nombre</label>
+              <input type="text" maxlength="30" class="form-control" id="filn" name="filn">
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Apellido Paterno</label>
+              <input type="text" maxlength="30" class="form-control" id="filap" name="filap">
+            </div>
+            <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Apellido Materno</label>
+              <input type="text" maxlength="30" class="form-control" id="filam" name="filam" placeholder="">
+            </div>
+            
+            
+          
             <div class="col-md-12">
               <center>
                 <button type="submit" style="width: 150px;margin-top:33px;" class="btn btn-danger active" aria-pressed="true">Buscar</button>
@@ -154,6 +169,7 @@ if (isset($_SESSION["listaAlumnos"])) {
         <table class="table">
           <thead class="table-secondary">
             <tr>
+              <th style='text-align: center;' scope="col">Ciclo escolar</th>
               <th style='text-align: center;' scope="col">No.Lista</th>
               <th scope="col">Nombre del alumno</th>
               <th style='text-align: center;' scope="col">Sexo</th>
@@ -173,7 +189,8 @@ if (isset($_SESSION["listaAlumnos"])) {
                   $imagen = "../imagenes/editar-mujer.png";
                 }
                 echo " <tr>
-    <th scope='row' style='text-align: center;'>" . $alumno['noLista'] . "</th>
+    <th scope='row' style='text-align: center;'>" . $alumno['ciclo'] . "</th>
+    <td style='text-align: center;' >" . $alumno['noLista'] . "</td>
     <td >" . $alumno['nombre'] . " " . $alumno['apePat'] . " " . $alumno['apeMat'] . "</td>
     <td style='text-align: center;' >" . $alumno['sexo'] . "</td>
     <td style='text-align: center;' >" . $alumno['grado'] . "</td>

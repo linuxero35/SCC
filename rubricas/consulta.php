@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 //session_start();
 
 if (isset($_SESSION["consultaRubrica"])) {
@@ -9,8 +10,9 @@ if (isset($_SESSION["consultaRubrica"])) {
 }
 
 //print_r($rubrica);
+$cicloSelect = consultaCiclosSelect(0, '');
 $gradosSelect = getGradosSelect();
-$anioSelect = getAniosSelect();
+//$anioSelect = getAniosSelect();
 $materiaSelect = consultaMateriasSelect(0);
 ?>
 <!DOCTYPE html>
@@ -38,6 +40,12 @@ $materiaSelect = consultaMateriasSelect(0);
 
     }
 
+    function setSemestre(index) {
+      var list = document.getElementById("idSemestre");
+      var value = list.options[index].value;
+      document.getElementById("semestre").value = value;
+    }
+  
     function setGrado(index) {
       var list = document.getElementById("txtgr");
       var value = list.options[index].id;
@@ -50,6 +58,11 @@ $materiaSelect = consultaMateriasSelect(0);
       var value = list.options[index].id;
       document.getElementById("filan").value = value;
 
+    }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
     }
   </script>
 </head>
@@ -78,7 +91,13 @@ $materiaSelect = consultaMateriasSelect(0);
             <div class="container">
               <h2>Filtro rúbrica</h2>
             </div>
-
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
+            </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Grados</label>
               <input type="hidden" name="idGrados" id="idGrados" value="">
@@ -87,11 +106,17 @@ $materiaSelect = consultaMateriasSelect(0);
               ?>
             </div>
             <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
-              <input type="hidden" maxlength="30" class="form-control" id="filan" name="filan">
-              <?php
-              echo $anioSelect;
-              ?>
+            <label for="inputAddress" class="form-label">Semestre</label><br>
+            <input type="hidden" name="semestre" id="semestre" value="">
+            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="">Todos</option>
+            <option value="1">Primer semestre</option>
+            <option value="2">Segundo semestre</option>
+            <option value="3">Tercer semestre</option>
+            <option value="4">Cuarto semestre</option>
+            <option value="5">Quinto semestre</option>
+            <option value="6">Sexto semestre</option>
+            </select>
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Materia</label>
@@ -111,11 +136,11 @@ $materiaSelect = consultaMateriasSelect(0);
         <table class="table">
           <thead class="table-secondary">
             <tr>
+            
               <th style='text-align: center;' scope="col">IdRubrica</th>
+              <th style='text-align: center;' scope="col">Ciclo escolar</th>
               <th style='text-align: center;' scope="col">Grado</th>
               <th style='text-align: center;' scope="col">Semestre</th>
-              <th style='text-align: center;' scope="col">Ciclo escolar</th>
-              <th style='text-align: center;' scope="col">Periodo</th>
               <th style='text-align: center;' scope="col">Materia</th>
               <th style='text-align: center;' scope="col">Criterio</th>
               <th style='text-align: center;' scope="col">Porcentaje</th>
@@ -130,13 +155,14 @@ $materiaSelect = consultaMateriasSelect(0);
 
                 echo " <tr>
     <td style='text-align: center;' >" . $rubrica['idRubrica'] . "</td>
-    <td style='text-align: center;' >" . $rubrica['criterio'] . "</td>
-    <td style='text-align: center;' >" . $rubrica['periodo'] . "</td>
-    <td style='text-align: center;' >" . $rubrica['porcentaje'] . "</td>
+    <td style='text-align: center;' >" . $rubrica['ciclo'] . "</td>
     <td style='text-align: center;' >" . $rubrica['grado'] . "</td>
-    <td style='text-align: center;' >" . $rubrica['anio'] . "</td>
-    <td style='text-align: center;' >" . $rubrica['materia'] . "</td>
     <td style='text-align: center;' >" . $rubrica['semestre'] . "</td>
+    <td style='text-align: center;' >" . $rubrica['materia'] . "</td>
+    <td style='text-align: center;' >" . $rubrica['criterio'] . "</td>
+    <td style='text-align: center;' >" . $rubrica['porcentaje'] . "</td>
+    
+    
     <td style='text-align: center;' > <a href='../controllers/rubrica/rubricaEditarController.php?IdRubrica=" . $rubrica['idRubrica'] . "'a><img src='../imagenes/editar.png'></a></td>
     
   </tr>";

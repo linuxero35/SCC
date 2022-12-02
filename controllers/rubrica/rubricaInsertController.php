@@ -14,10 +14,9 @@ try {
         $rubrica = array(
             "criterio" => $_POST['idCriterio'],
             "porcentaje" => $_POST['txtap'],
-            "periodo" => $_POST['idPeriodo'],
             "grado" => $_POST['idGrado'],
             "idRubrica" => $IdRubrica,
-            "anio" => $_POST['txtanio'],
+            "idciclo" => $_POST['idciclo'],
             "materia" => $_POST['idMateria'],
             "semestre" => $_POST['semestre']
         );
@@ -28,7 +27,7 @@ try {
             updateRubrica($rubrica);
 
          header("Location: ../../rubricas/consulta.php");
-            exit();
+           exit();
         } else {
             insertarRubrica($rubrica);
         }

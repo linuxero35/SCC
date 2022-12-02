@@ -10,6 +10,26 @@ function capturaCalificaciones($filtro)
         echo $e->getMessage();
     }
 }
+
+function updateCalificaciones($filtro)
+{
+    try {
+        return updateCalificacionesDAO($filtro);
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+
+function updateCalificacionesCriterio($calificacioncriterio)
+    {
+        try {
+           return updateCalificacionesCriterioDAO($calificacioncriterio);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+    }
+
 function capturaCalificacionesCriterio($calificacioncriterio)
     {
         try {
@@ -45,5 +65,13 @@ function capturaCalificacionesCriterio($calificacioncriterio)
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }
     }
-
+    function consultaTablaCalificaciones($IdCalificacion)
+    {
+        try {
+           return consultaTablaCalificacionesDAO($IdCalificacion);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+    }
+    
 ?>

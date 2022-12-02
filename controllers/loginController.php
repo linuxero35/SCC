@@ -7,11 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Password = $_POST['Password'];
     echo $IdUsuario;
     echo $Password;
-    $valido=login($IdUsuario, $Password);
-    if($valido){
+    $valida=login($IdUsuario, $Password);
+    if($valida){
 
-    header("Location: ../home.php");
+       
+            header("Location: ../home.php");
+     
+            
+       
+  
     exit();
+    } else {
+        $alumno=loginalumno($IdUsuario, $Password);
+        header("Location: ../controllers/calificaciones/tablacalificacionesController.php?IdAlumno=".$alumno['idalumno'].'&tipo=2');
+        exit();
     }
 
 }

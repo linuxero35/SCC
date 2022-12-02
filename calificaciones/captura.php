@@ -4,10 +4,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
 $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
+$cicloSelect = consultaCiclosSelect(0, '');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,20 +34,83 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       var value = list.options[index].id;
       document.getElementById("txtIdGrado").value = value;
       reload();
+      disabledOptions();
+    }
+
+    function disabledOptions() {
+      var idgrado = document.getElementById("txtIdGrado").value;
+      document.getElementById("idSemestre").options[0].selected = 'selected';
+      document.querySelectorAll("#idSemestre option").forEach(opt => {
+
+        opt.disabled = false;
+
+        switch (idgrado) {
+          case '1':
+            if (opt.value != "1" && opt.value != "2") {
+              opt.disabled = true;
+            }
+            break;
+          case '2':
+            if (opt.value != "3" && opt.value != "4") {
+              opt.disabled = true;
+            }
+            break;
+          case '3':
+            if (opt.value != "5" && opt.value != "6") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
+    }
+
+    function disabledOptionsPeriodo() {
+      var par = document.getElementById("semestre").value % 2;
+      document.getElementById("txtpe").options[0].selected = 'selected';
+      
+      document.querySelectorAll("#txtpe option").forEach(opt => {
+
+        opt.disabled = false;
+       
+        switch (par) {
+          case 0:
+            if (opt.id != "4" && opt.id != "5" && opt.id != "6") {
+              opt.disabled = true;
+            }
+            break;
+          case 1:
+            if (opt.id != "1" && opt.id != "2"  && opt.id != "3") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
+    }
+
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
+    }
+
+    function setSemestre(index) {
+      var list = document.getElementById("idSemestre");
+      var value = list.options[index].value;
+      document.getElementById("semestre").value = value;
+      disabledOptionsPeriodo();
     }
 
     function setMateria(index) {
       var list = document.getElementById("txtIdMateria");
       var value = list.options[index].id;
       document.getElementById("txtMateria").value = value;
-
+      tabla();
     }
 
     function setPeriodo(index) {
       var list = document.getElementById("txtpe");
       var value = list.options[index].id;
       document.getElementById("txtPeriodo").value = value;
-      tabla();
     }
 
     function setAlumno(index) {
@@ -63,6 +128,10 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
       }
 
       document.getElementById("filSexo").value = sexo;
+    }
+
+    function setCalificacion(valor, porcentaje, id) {
+      document.getElementById("calificacion_" + id).value = ((porcentaje / 100) * valor).toFixed(2);
     }
   </script>
   <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -87,7 +156,9 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     function tabla() {
       var idGrado = document.getElementById("txtIdGrado").value;
       var idPeriodo = document.getElementById("txtPeriodo").value;
-      var idMateria = document.getElementById("txtIdMateria").value;
+      var idMateria = document.getElementById("txtMateria").value;
+      var idCiclo = document.getElementById("idciclo").value;
+      var idSemestre = document.getElementById("semestre").value;
 
       $.ajax({
         type: 'GET',
@@ -95,7 +166,9 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
         data: {
           idGrado: idGrado,
           idPeriodo: idPeriodo,
-          idMateria: idMateria
+          idMateria: idMateria,
+          idCiclo: idCiclo,
+          idSemestre: idSemestre
         },
         success: function(data) {
           $("#containerTabla").html(data);
@@ -126,6 +199,13 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
               <h2 style="color:white;">Captura de Calificaciones</h2>
             </div>
             <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
+            </div>
+            <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
               <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
               <?php
@@ -133,16 +213,17 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
               ?>
             </div>
             <div class="col-md-6">
-            <label for="inputAddress" class="form-label">Semestre</label><br>
-            <input type="hidden" name="semestre" id="semestre" value="1">
-            <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
-            <option value="1">Primer semestre</option>
-            <option value="2">Segundo semestre</option>
-            <option value="3">Tercer semestre</option>
-            <option value="4">Cuarto semestre</option>
-            <option value="5">Quinto semestre</option>
-            <option value="6">Sexto semestre</option>
-            </select>
+              <label for="inputAddress" class="form-label">Semestre</label><br>
+              <input type="hidden" name="semestre" id="semestre" value="1">
+              <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+              <option value="">Todos</option>
+                <option value="1">Primer semestre</option>
+                <option value="2">Segundo semestre</option>
+                <option value="3">Tercer semestre</option>
+                <option value="4">Cuarto semestre</option>
+                <option value="5">Quinto semestre</option>
+                <option value="6">Sexto semestre</option>
+              </select>
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Periodo</label>
@@ -177,9 +258,9 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
           <div class="col-12" style="padding: 12px;">
             <table style="width: 100%;">
               <tr>
-              <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
+                <td align="right"><button type="submit" class="btn btn-primary">Guardar</button></td>
                 <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+                <td align="left"><button type="reset" value="Reset" class="btn btn-danger">Cancelar</button></td>
               </tr>
             </table>
           </div>

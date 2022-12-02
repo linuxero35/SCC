@@ -4,10 +4,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/alumnos/consultaService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/rubrica/capturaService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
 $alumnosSelect = consultaAlumnoSelect(NULL, 0, '');
+$cicloSelect = consultaCiclosSelect(0, '');
 
 if (isset($_SESSION["listaCalificaciones"])) {
   $calificaciones = $_SESSION["listaCalificaciones"];
@@ -57,6 +59,17 @@ if (isset($_SESSION["listaCalificaciones"])) {
       var list = document.getElementById("txtalumno");
       var value = list.options[index].id;
       document.getElementById("txtIdAlumno").value = value;
+    }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
+    }
+
+    function setSemestre(index) {
+      var list = document.getElementById("idSemestre");
+      var value = list.options[index].value;
+      document.getElementById("semestre").value = value;
     }
 
     function setSexo(value) {
@@ -135,6 +148,13 @@ if (isset($_SESSION["listaCalificaciones"])) {
               <h2>Busqueda de Calificaciones</h2>
             </div>
             <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
+              </div>
+            <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Grado</label>
               <input type="hidden" maxlength="45" class="form-control" id="txtIdGrado" name="txtIdGrado" placeholder="" required>
               <?php
@@ -143,8 +163,9 @@ if (isset($_SESSION["listaCalificaciones"])) {
             </div>
             <div class="col-md-6">
             <label for="inputAddress" class="form-label">Semestre</label><br>
-            <input type="hidden" name="semestre" id="semestre" value="1">
+            <input type="hidden" name="semestre" id="semestre" value="">
             <select onchange="setSemestre(this.selectedIndex)" name="idSemestre" id="idSemestre" class="form-select">
+            <option value="">Todos</option>
             <option value="1">Primer semestre</option>
             <option value="2">Segundo semestre</option>
             <option value="3">Tercer semestre</option>
@@ -197,7 +218,9 @@ if (isset($_SESSION["listaCalificaciones"])) {
         <table class="table">
           <thead class="table-secondary">
             <tr>
+              <th style='text-align: center;' scope="col">Ciclo</th>
               <th style='text-align: center;' scope="col">Grado</th>
+              <th style='text-align: center;' scope="col">Semestre</th>
               <th scope="col">Periodo</th>
               <th style='text-align: center;' scope="col">Materia</th>
               <th style='text-align: center;' scope="col">Nombre del alumno</th>
@@ -211,7 +234,9 @@ if (isset($_SESSION["listaCalificaciones"])) {
               foreach ($calificaciones as $calificaion) {
 
                 echo " <tr>
-    <th scope='row' style='text-align: center;'>" . $calificaion['Grado'] . "</th>
+    <th scope='row' style='text-align: center;'>" . $calificaion['ciclo'] . "</th>
+    <td style='text-align: center;' >" . $calificaion['Grado'] . "</td>
+    <td style='text-align: center;' >" . $calificaion['semestre'] . "</td>
     <td >" . $calificaion['Periodo'] . "</td>
     <td style='text-align: center;' >" . $calificaion['Materia'] . "</td>
     <td style='text-align: center;' >" . $calificaion['Nombre'] . "</td>

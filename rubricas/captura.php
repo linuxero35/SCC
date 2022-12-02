@@ -3,10 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/materias/materiasService
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/periodos/periodosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/criterios/criteriosService.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/grados/gradosService.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/SCC/services/ciclo/cicloConsultaService.php");
 $periodosSelect = getPeriodosSelec(0);
 $criteriosSelect = getCriterioSelec(0);
 $gradosSelect = getGradosSelect();
 $materiaSelect = consultaMateriasSelect(0);
+$cicloSelect = consultaCiclosSelect(0, '');
 
 ?>
 <!DOCTYPE html>
@@ -54,6 +56,11 @@ $materiaSelect = consultaMateriasSelect(0);
       var value = list.options[index].id;
       document.getElementById("idGrado").value = value;
     }
+    function setCiclo(index) {
+      var list = document.getElementById("txtCiclo");
+      var value = list.options[index].id;
+      document.getElementById("idciclo").value = value;
+    }
   </script>
 </head>
 
@@ -74,6 +81,14 @@ $materiaSelect = consultaMateriasSelect(0);
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             <div class="container">
               <h2>Rúbrica</h2>
+              <input type="hidden" name="idPeriodo" id="idPeriodo" value="1">
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Ciclo escolar</label>
+              <input type="hidden" maxlength="30" class="form-control" id="idciclo" name="idciclo">
+              <?php
+              echo $cicloSelect;
+              ?>
             </div>
             <div class="col-md-6">
               <label for="inputAddress" class="form-label">Grados</label>
@@ -94,17 +109,8 @@ $materiaSelect = consultaMateriasSelect(0);
             <option value="6">Sexto semestre</option>
             </select>
             </div>
-            <div class="col-md-6">
-              <label for="inputAddress" class="form-label">Periodo</label>
-              <input type="hidden" name="idPeriodo" id="idPeriodo" value="0">
-              <?php
-              echo $periodosSelect;
-              ?>
-            </div>
-            <div class="col-md-6">
-              <label for="inputAddress" class="form-label">Ciclo escolar</label>
-              <input type="number" maxlength="30" class="form-control" id="txtanio" name="txtanio" required>
-            </div>
+            
+            
             <div class="col-md-6">
             <label for="inputAddress" class="form-label">Materia</label>
               <input type="hidden" name="idMateria" id="idMateria" value="">

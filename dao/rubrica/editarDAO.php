@@ -6,7 +6,7 @@ function buscarRubricaDAO($idRubrica)
     try {
         $conn = getConnection();
 
-        $sql = "SELECT r.IdCriterio, r.IdPeriodo,r.anio, r.Porcentaje, r.IdGrado, r.idmateria, r.IdRubrica, r.semestre FROM rubrica r WHERE r.IdRubrica = " . $idRubrica;
+        $sql = "SELECT r.IdCriterio, r.IdPeriodo,r.idciclo, r.Porcentaje, r.IdGrado, r.idmateria, r.IdRubrica, r.semestre FROM rubrica r WHERE r.IdRubrica = " . $idRubrica;
         echo $sql;
         $result = $conn->query($sql);
 
@@ -17,7 +17,7 @@ function buscarRubricaDAO($idRubrica)
                 $registro = array(
                     "idCriterio" => $row['IdCriterio'],
                     "idPeriodo" => $row['IdPeriodo'],
-                    "anio" => $row['anio'],
+                    "idciclo" => $row['idciclo'],
                     "porcentaje" => $row['Porcentaje'],
                     "idRubrica" => $row['IdRubrica'],
                     "idGrado" => $row['IdGrado'],
@@ -36,7 +36,7 @@ function updateRubricaDAO($rubrica)
 {
     try {
         $conn = getConnection();
-        $sql = "UPDATE rubrica SET IdCriterio = " . $rubrica['criterio'] . ", IdPeriodo = " . $rubrica['periodo'] . ", Porcentaje = " . $rubrica['porcentaje'] . ", IdGrado =" . $rubrica['grado'] . ", anio= " . $rubrica['anio'] . ",IdUsuarioMod =1, FechaMod = now(), idmateria = ".$rubrica['materia'] .", semestre = " . $rubrica['semestre'] . " WHERE IdRubrica = " . $rubrica['idRubrica'] . "";
+        $sql = "UPDATE rubrica SET IdCriterio = " . $rubrica['criterio'] . ", Porcentaje = " . $rubrica['porcentaje'] . ", IdGrado =" . $rubrica['grado'] . ", idciclo= " . $rubrica['idciclo'] . ",IdUsuarioMod =1, FechaMod = now(), idmateria = ".$rubrica['materia'] .", semestre = " . $rubrica['semestre'] . " WHERE IdRubrica = " . $rubrica['idRubrica'] . "";
         echo $sql;
         $result = $conn->query($sql);
         return $rubrica["idRubrica"];
