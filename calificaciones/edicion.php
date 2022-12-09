@@ -42,6 +42,7 @@ $cicloSelect = consultaCiclosSelect(0, '');
       var value = list.options[index].id;
       document.getElementById("txtIdGrado").value = value;
       reload();
+      disabledOptions();
     }
 
     function setMateria(index) {
@@ -66,6 +67,7 @@ $cicloSelect = consultaCiclosSelect(0, '');
       var list = document.getElementById("idSemestre");
       var value = list.options[index].value;
       document.getElementById("semestre").value = value;
+      disabledOptionsPeriodo();
     }
 
     function setAlumno(index) {
@@ -83,6 +85,55 @@ $cicloSelect = consultaCiclosSelect(0, '');
       }
 
       document.getElementById("filSexo").value = sexo;
+    }
+    function disabledOptions() {
+      var idgrado = document.getElementById("txtIdGrado").value;
+      document.getElementById("idSemestre").options[0].selected = 'selected';
+      document.querySelectorAll("#idSemestre option").forEach(opt => {
+
+        opt.disabled = false;
+
+        switch (idgrado) {
+          case '1':
+            if (opt.value != "1" && opt.value != "2") {
+              opt.disabled = true;
+            }
+            break;
+          case '2':
+            if (opt.value != "3" && opt.value != "4") {
+              opt.disabled = true;
+            }
+            break;
+          case '3':
+            if (opt.value != "5" && opt.value != "6") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
+    }
+
+    function disabledOptionsPeriodo() {
+      var par = document.getElementById("semestre").value % 2;
+      document.getElementById("txtpe").options[0].selected = 'selected';
+      
+      document.querySelectorAll("#txtpe option").forEach(opt => {
+
+        opt.disabled = false;
+       
+        switch (par) {
+          case 0:
+            if (opt.id != "4" && opt.id != "5" && opt.id != "6") {
+              opt.disabled = true;
+            }
+            break;
+          case 1:
+            if (opt.id != "1" && opt.id != "2"  && opt.id != "3") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
     }
   </script>
   <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -111,6 +162,9 @@ $cicloSelect = consultaCiclosSelect(0, '');
       var idPeriodo = document.getElementById("txtPeriodo").value;
       var idCalificacion = document.getElementById("idCalificacion").value;
       var idMateria = document.getElementById("txtMateria").value;
+      var idCiclo = document.getElementById("idciclo").value;
+      var idSemestre = document.getElementById("semestre").value;
+
 
       $.ajax({
         type: 'GET',
@@ -119,12 +173,18 @@ $cicloSelect = consultaCiclosSelect(0, '');
           idGrado: idGrado,
           idPeriodo: idPeriodo,
           idCalificacion: idCalificacion,
-          idMateria: idMateria
+          idMateria: idMateria,
+          idCiclo: idCiclo,
+          idSemestre: idSemestre
         },
         success: function(data) {
           $("#containerTabla").html(data);
         }
       });
+    }
+
+    function setCalificacion(valor, porcentaje, id) {
+      document.getElementById("calificacion_" + id).value = ((porcentaje / 100) * valor).toFixed(2);
     }
   </script>
   

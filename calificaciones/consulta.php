@@ -39,6 +39,7 @@ if (isset($_SESSION["listaCalificaciones"])) {
       var value = list.options[index].id;
       document.getElementById("txtIdGrado").value = value;
       reload();
+      disabledOptions()
     }
 
     function setMateria(index) {
@@ -70,6 +71,7 @@ if (isset($_SESSION["listaCalificaciones"])) {
       var list = document.getElementById("idSemestre");
       var value = list.options[index].value;
       document.getElementById("semestre").value = value;
+      disabledOptionsPeriodo()
     }
 
     function setSexo(value) {
@@ -81,6 +83,56 @@ if (isset($_SESSION["listaCalificaciones"])) {
       }
 
       document.getElementById("filSexo").value = sexo;
+    }
+
+    function disabledOptions() {
+      var idgrado = document.getElementById("txtIdGrado").value;
+      document.getElementById("idSemestre").options[0].selected = 'selected';
+      document.querySelectorAll("#idSemestre option").forEach(opt => {
+
+        opt.disabled = false;
+
+        switch (idgrado) {
+          case '1':
+            if (opt.value != "1" && opt.value != "2") {
+              opt.disabled = true;
+            }
+            break;
+          case '2':
+            if (opt.value != "3" && opt.value != "4") {
+              opt.disabled = true;
+            }
+            break;
+          case '3':
+            if (opt.value != "5" && opt.value != "6") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
+    }
+
+    function disabledOptionsPeriodo() {
+      var par = document.getElementById("semestre").value % 2;
+      document.getElementById("txtpe").options[0].selected = 'selected';
+      
+      document.querySelectorAll("#txtpe option").forEach(opt => {
+
+        opt.disabled = false;
+       
+        switch (par) {
+          case 0:
+            if (opt.id != "4" && opt.id != "5" && opt.id != "6") {
+              opt.disabled = true;
+            }
+            break;
+          case 1:
+            if (opt.id != "1" && opt.id != "2"  && opt.id != "3") {
+              opt.disabled = true;
+            }
+            break;
+        }
+      });
     }
   </script>
   <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -94,7 +146,8 @@ if (isset($_SESSION["listaCalificaciones"])) {
         url: '../controllers/alumnos/ajaxController.php',
         data: {
           idGrado: idGrado, 
-          idMateria:  idMateria
+          idMateria:  idMateria,
+          required: false
         },
         success: function(data) {
           $("#containerAlumnos").html(data);
@@ -190,7 +243,7 @@ if (isset($_SESSION["listaCalificaciones"])) {
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Alumno</label>
-              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="" required>
+              <input type="hidden" maxlength="45" class="form-control" id="txtIdAlumno" name="txtIdAlumno" placeholder="">
               <div id="containerAlumnos">
                 <?php
                 echo $alumnosSelect;
@@ -209,7 +262,7 @@ if (isset($_SESSION["listaCalificaciones"])) {
               <tr>
               <td align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
                 <td style="width: 10px;"></td>
-                <td align="left"><button type="submit" class="btn btn-danger">Cancelar</button></td>
+                <td align="left"><button type="reset" class="btn btn-danger">Cancelar</button></td>
               </tr>
             </table>
           </div>

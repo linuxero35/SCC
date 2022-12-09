@@ -57,10 +57,10 @@ function capturaCalificacionesCriterio($calificacioncriterio)
         }
     }
 
-    function consultaCalificacionDetalle($idCalificacion)
+    function consultaCalificacionDetalle($idCalificacion, $idgrado)
     {
         try {
-           return consultaCalificacionDetalleDAO($idCalificacion);
+           return consultaCalificacionDetalleDAO($idCalificacion, $idgrado);
         } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }

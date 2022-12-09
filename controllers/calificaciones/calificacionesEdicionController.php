@@ -13,7 +13,8 @@ try {
     
     $calificacion = consultaCalificacion($idCalificacion);
 
-    $calificacionDetalle = consultaCalificacionDetalle($idCalificacion);
+
+    $calificacionDetalle = consultaCalificacionDetalle($idCalificacion, $calificacion['Grado']);
 
     $_SESSION["calificacion"] = $calificacion;
     $_SESSION["calificacionDetalle"] = $calificacionDetalle;

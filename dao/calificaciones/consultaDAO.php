@@ -131,19 +131,25 @@ function consultaCalificacionDAO($IdCalificacion)
     }
 }
 
-function consultaCalificacionDetalleDAO($IdCalificacion)
+function consultaCalificacionDetalleDAO($IdCalificacion, $idgrado)
 {
     try {
         $conn = getConnection();
 
-        $sql = "select c.IdCalificacionCriterio," .
+        $sql = "select distinct c.IdCalificacionCriterio," .
                       "c.IdCalificacion," .
                       "c.IdCriterio," .
                       "c.Calificacion, " .
-                      "cr.Criterio " .
+                      "cr.Criterio," .
+                      "r.Porcentaje," .
+                      "c.Calificacionf " .
                  "from calificacionescriterio c " .
                  "left join calificaciones cl on cl.idcalificacion=c.idcalificacion " .
                  "left join criterios cr on cr.IdCriterio = c.IdCriterio " .
+                 "left join rubrica r on cl.idciclo = r.idciclo " .
+                                    "and cl.idsemestre = r.semestre " .
+                                    "and cl.idmateria = r.idmateria " .
+                                    "and r.idgrado = " . $idgrado . " " .
                 "where c.idcalificacion = " . $IdCalificacion;
 
         $contador = 0;
@@ -156,7 +162,9 @@ function consultaCalificacionDetalleDAO($IdCalificacion)
                     "idCalificacion" => $row['IdCalificacion'],
                     "idCriterio" => $row['IdCriterio'],
                     "criterio" => $row['Criterio'],
-                    "calificacion" => $row['Calificacion']
+                    "calificacion" => $row['Calificacion'],
+                    "calificacionf" => $row['Calificacionf'],
+                    "porcentaje" => $row['Porcentaje']
                 );
 
                 $registros[$contador++] = $registro;

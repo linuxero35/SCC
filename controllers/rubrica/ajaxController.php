@@ -19,7 +19,7 @@ if (isset($_GET['idGrado'])) {
 
     if (isset($_GET['idCalificacion'])) {
         $idCalificacion = intval($_GET['idCalificacion']);
-        $rows = consultaCalificacionDetalle($idCalificacion);
+        $rows = consultaCalificacionDetalle($idCalificacion, $idGrado);
         //echo "calificaciones";
        // print_r($rows);
         $html = tablaHTML($rows);

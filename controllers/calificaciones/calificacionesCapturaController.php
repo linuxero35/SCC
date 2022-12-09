@@ -42,6 +42,7 @@ try {
                      "IdCalificacion"=>$idcalificacion,
                      "IdCalificacionCriterio" => $key,
                      "calificacion" => $_POST['criterios'][$key],
+                     "calificacionf" => $_POST['calificaciones'][$key],
                      "IdUsuarioAlta" => 1
                  );
  
@@ -51,8 +52,8 @@ try {
 
             
 
-          //  header("Location: ../../alumnos/lista.php");
-          //  exit();
+            header("Location: ../../calificaciones/consulta.php");
+            exit();
         } else {
             $criterioskeys = array_keys($_POST['criterios']);
             $calificacionf = 0;

@@ -151,7 +151,22 @@
             Calificaciones del alumno
           </a>
         </li>
-       
+        <li>
+          <a href="../usuarios/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Usuarios
+          </a>
+        </li>
+        <li>
+          <a href="../usuarios/consulta.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Consulta Usuarios
+          </a>
+        </li>
         <li>
           <a href="../index.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">

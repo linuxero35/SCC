@@ -48,7 +48,6 @@ function tablaHTML($criterios)
         '<th scope="col">Calificación</th>' .
         '</tr></thead> <tbody>';
 
-
     if (is_array($criterios)) {
         $count =  0;
         foreach ($criterios as $criterio) {
@@ -60,6 +59,7 @@ function tablaHTML($criterios)
             $count = $count + 1;
 
             $id = $count;
+            $calificacionf = '';
 
             if(isset($criterio['idCalificacionCriterio'])){
                 $id = $criterio['idCalificacionCriterio'];
@@ -67,10 +67,14 @@ function tablaHTML($criterios)
                 $id = $criterio['idCriterio'];
             }
 
+            if(isset($criterio['calificacionf'])){
+                $calificacionf = $criterio['calificacionf'];
+            }
+
             $tabla .= '<tr>' .
                 '<td>' . $criterio['criterio'] . '(' .  $criterio['porcentaje'] . '%)' .'</td>' .
                 '<td><div class="col-sm-5"><input type="text" name="criterios[' . $id  . ']" class="form-control" value="' . ($calificacion == '0' ? '' : $calificacion) . '" onchange="setCalificacion(this.value,' . $criterio['porcentaje'] . ',' . $id . ')" required></td></div>' .
-                '<td><div class="col-sm-5"><input type="text" id="calificacion_' . $id . '" name="calificaciones[' . $id  . ']" class="form-control" value="" required></td></div>' .
+                '<td><div class="col-sm-5"><input type="text" id="calificacion_' . $id . '" name="calificaciones[' . $id  . ']" class="form-control" value="' . $calificacionf . '" required></td></div>' .
                 '</tr>';
         }
     }

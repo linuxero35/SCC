@@ -21,8 +21,8 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-//header("Location: ../../calificaciones/consulta.php");
-//exit();
+header("Location: ../../calificaciones/consulta.php");
+exit();
 
 
 ?>

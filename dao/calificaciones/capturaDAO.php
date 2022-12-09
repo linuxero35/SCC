@@ -119,7 +119,7 @@ function updateCalificacionesCriterioDAO($calificacioncriterio)
     try {
         $conn = getConnection();
 
-        $sql = "update calificacionescriterio set calificacion=" . $calificacioncriterio['calificacion']  . " where idcalificacioncriterio=" . $calificacioncriterio['IdCalificacionCriterio'];
+        $sql = "update calificacionescriterio set calificacion=" . $calificacioncriterio['calificacion']  . ", calificacionf=" . $calificacioncriterio['calificacionf']  . " where idcalificacioncriterio=" . $calificacioncriterio['IdCalificacionCriterio'];
        
         echo $sql;
         $result = $conn->query($sql);
