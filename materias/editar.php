@@ -8,8 +8,8 @@ $materiaSelect = consultaMateriasSelect(0);
 $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
 $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
-if (isset($_SESSION["criterio"])) {
-  $criterio = $_SESSION["criterio"];
+if (isset($_SESSION["materia"])) {
+  $materia = $_SESSION["materia"];
 }
 ?>
 <!DOCTYPE html>
@@ -39,12 +39,12 @@ if (isset($_SESSION["criterio"])) {
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/criterios/capturaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/materias/capturaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Materia</label>
-              <input type="text" maxlength="45" class="form-control" id="txtIdCriterio" name="txtIdCriterio" value="<?php echo $criterio["criterio"];?>" required>
-              <input type="hidden" maxlength="45" class="form-control" id="IdCriterio" name="IdCriterio" value="<?php echo $criterio["idCriterio"];?>">
+              <input type="text" maxlength="45" class="form-control" id="txtmateria" name="txtmateria" value="<?php echo $materia["Nombre"];?>" required>
+              <input type="hidden" maxlength="45" class="form-control" id="IdMateria" name="IdMateria" value="<?php echo $materia["idmateria"];?>">
             </div>
             <br>
             <div class="col-md-6" style="padding-top: 50px;">
@@ -52,7 +52,7 @@ if (isset($_SESSION["criterio"])) {
                 <label class="form-check-label" for="gridCheck">
                   Activo
                 </label>
-                <input type="checkbox" class="form-check-input" <?php echo $criterio["activo"]; ?> id="activo" name="activo[]">
+                <input type="checkbox" class="form-check-input" <?php echo $materia["activo"] == '1' ? 'checked' : '' ?> id="activo" name="activo[]" >
               </div>
             </div>
           </div>

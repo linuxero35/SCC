@@ -26,4 +26,44 @@ function consultaMateriasDAO()
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
 }
+function consultaMateriaDAO($materia){
+    try {
+        $conexion = getConnection();
+ 
+        $filCriterio = '';
+        $filActivo = '';
+
+        if ($materia['nombre'] != '') {
+            $filCriterio = "AND m.nombre like '%" . $materia['nombre'] . "%' ";
+        }
+        
+        if ($materia['checkActivo'] != '') {
+            $filActivo = "AND m.active = " . $materia['checkActivo'] . " ";
+        }
+
+        $sql = "SELECT m.IdMateria, m.Nombre, CASE m.Active WHEN 1 THEN 'Activo' ELSE 'Inactivo' END AS Activo FROM materias m WHERE m.nombre IS NOT NULL " .
+        $filCriterio .
+        $filActivo;
+        
+        $result = $conexion -> query($sql);
+        echo $sql;
+         $contador=0;
+        if ($result -> num_rows > 0) {
+         while ($materia = $result -> fetch_assoc()) {
+             echo $materia['Nombre'];
+             $valores = array(
+                "IdMateria" => $materia['IdMateria'],
+                "Nombre" => $materia['Nombre'],
+                "Activo" => $materia['Activo']
+            );
+ 
+             $materias[$contador] = $valores;
+             $contador=$contador+1;
+         }
+        }
+         return $materias;
+    } catch(Exception $e){
+     echo 'Excepción capturada: ',  $e -> getMessage(), "\n";
+    }
+ }
 ?>

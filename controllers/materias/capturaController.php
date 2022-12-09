@@ -1,13 +1,14 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/materias/capturaService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/materias/editarService.php");
 
 try {
     if (!empty($_POST)) {
 
-        $idCriterio = 0;
+        $idMateria = 0;
 
-        if(isset($_POST['IdCriterio'])){
-            $idCriterio = $_POST['IdCriterio'];
+        if(isset($_POST['IdMateria'])){
+            $idMateria = $_POST['IdMateria'];
         }
 
         $checkActivo = '';
@@ -18,21 +19,21 @@ try {
             $checkActivo = '0';
         }
 
-        $criterio = array(
-            "idUsuario" => "1",
-            "activo" => $checkActivo,
-            "criterio" => $_POST['txtIdCriterio'],
-            "idCriterio" =>  $idCriterio
+        $materia = array(
+            "IdMateria" => $idMateria,
+            "nombre" => $_POST['txtmateria'],
+            "activo" => $checkActivo
+            
         );
 
-        print_r($criterio);
+        print_r($materia);
 
-        if (isset($_POST['IdCriterio'])) {
-             updateCriterio($criterio);
-           header("Location: ../../criterios/consulta.php");
+        if (isset($_POST['IdMateria'])) {
+            updateMateria($materia);
+           header("Location: ../../materias/consulta.php");
            exit();
         } else {
-            insertCriterio($criterio);
+            insertMaterias($materia);
         }
         
     }
@@ -40,6 +41,6 @@ try {
     echo $e->getMessage();
 }
 
-header("Location: ../../criterios/captura.php");
+header("Location: ../../materias/captura.php");
 exit();
 ?>

@@ -25,4 +25,8 @@ function consultaMateriasSelect($IdMateria)
         echo $e->getMessage();
     }
 }
+function consultaMaterias($materia)
+{
+    return consultaMateriaDAO($materia);
+}
 ?>

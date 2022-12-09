@@ -96,7 +96,23 @@
           </a>
         </li>
         <li>
-          <a href="../criterios/captura.php" class="nav-link text-white">
+          <a href="../materias/captura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Materias
+          </a>
+        </li>
+        <li>
+          <a href="../materias/consulta.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Consulta Materias
+          </a>
+        </li>
+        <li>
+          <a href="../materias/captura.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use xlink:href="#grid" />
             </svg>

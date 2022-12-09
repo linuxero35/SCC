@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/materias/materiasService.php");
 session_start();
 try {
     if (!empty($_POST)) {
@@ -13,24 +13,24 @@ try {
             $checkActivo = '0';
         }
 
-        $filtros = array(
-            "criterio" => $_POST['txtCriterio'],
+        $materia = array(
+            "nombre" => $_POST['txtmateria'],
             "checkActivo" => $checkActivo
         );
 
-      $registros = consultaCriterio($filtros);
+      $registros = consultaMaterias($materia);
 
       print_r($registros);
 
-      $_SESSION["listaCriterios"]=$registros;
+      $_SESSION["listaMaterias"]=$registros;
       
-      print_r($filtros);
+      print_r($materia);
     }
 
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-header("Location: ../../criterios/consulta.php");
+header("Location: ../../materias/consulta.php");
 exit();
 
 

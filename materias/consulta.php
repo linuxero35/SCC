@@ -9,10 +9,9 @@ $periodoSelect = getPeriodosSelec(0);
 $gradosSelect = getGradosSelect(0);
 $alumnosSelect = consultaAlumnoSelect(NULL, 0, '');
 
-if (isset($_SESSION["listaCriterios"])) {
-  $criterios = $_SESSION["listaCriterios"];
+if (isset($_SESSION["listaMaterias"])) {
+  $materias = $_SESSION["listaMaterias"];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,12 +122,12 @@ if (isset($_SESSION["listaCriterios"])) {
     <div>
       <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Consulta Criterios</h1>
+          <h1 style="color: white;">Consulta Materias</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/criterios/consultaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/materias/consultaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
 
             <div class="container">
@@ -136,7 +135,7 @@ if (isset($_SESSION["listaCriterios"])) {
             </div>
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Materia</label>
-              <input type="text" maxlength="45" class="form-control" id="txtmateria" name="txtmaria" placeholder="" >
+              <input type="text" maxlength="45" class="form-control" id="txtmateria" name="txtmateria" placeholder="" >
             </div>
             <br>
             <div class="col-md-6" style="padding-top: 50px;">
@@ -175,17 +174,17 @@ if (isset($_SESSION["listaCriterios"])) {
           <tbody>
 
             <?php
-            if (isset($_SESSION["listaCriterios"])) {
-              foreach ($criterios as $criterio) {
+            if (isset($_SESSION["listaMaterias"])) {
+              foreach ($materias as $materia) {
 
                 echo " <tr>
-    <th scope='row' style='text-align: center;'>" . $criterio['Criterio'] . "</th>
-    <td >" . $criterio['Activo'] . "</td>
-    <td style='text-align: center;'><a href='../controllers/criterios/editarController.php?IdCriterio=" . $criterio['IdCriterio'] . "'><img style='cursor:pointer;' src='../imagenes/editar.png' alt='editar'></a> </td>
+    <th scope='row' style='text-align: center;'>" . $materia['Nombre'] . "</th>
+    <td >" . $materia['Activo'] . "</td>
+    <td style='text-align: center;'><a href='../controllers/materias/editarController.php?IdMateria=" . $materia['IdMateria'] . "'><img style='cursor:pointer;' src='../imagenes/editar.png' alt='editar'></a> </td>
     
   </tr>";
               }
-              unset($_SESSION["listaCriterios"]);
+              unset($_SESSION["listaMaterias"]);
             }
             ?>
           </tbody>

@@ -1,18 +1,18 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/criterios/criteriosService.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/SCC/services/materias/editarService.php");
 
 try {
   if (!empty($_GET)) {
 
-    $idCriterio = $_GET['IdCriterio'];
+    $IdMateria = $_GET['IdMateria'];
 
-    buscarCriterio($idCriterio);
+    buscarMateria($IdMateria);
   }
 } catch (Exception $e) {
   echo $e->getMessage();
 }
 
-header("Location: ../../criterios/editar.php");
+header("Location: ../../materias/editar.php");
 exit();
 ?>

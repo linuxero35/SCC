@@ -31,12 +31,12 @@ $alumnosSelect = consultaAlumnoSelect(NULL, 0, 'required');
     <div>
       <div class="container" style="background-color:#007b00; width: 100%; padding: 12px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
         <center>
-          <h1 style="color: white;">Captura Materia</h1>
+          <h1 style="color: white;">Captura Materias</h1>
         </center>
       </div>
       <div class="container-fluid" style="width: 85%;">
         <div class="conatiner" style="margin: 11px; margin-bottom: 25px;"></div>
-        <form class="row g-3" method="post" action="/SCC/controllers/criterios/capturaController.php">
+        <form class="row g-3" method="post" action="/SCC/controllers/materias/capturaController.php">
           <div id="datosPersonales" class="row g-3" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding-left:30px; padding-right:30px; padding-bottom: 30px; border-radius:8px;">
             <div class="col-md-6">
               <label for="inputAddress2" class="form-label">Materia</label>
