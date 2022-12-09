@@ -184,6 +184,22 @@
           </a>
         </li>
         <li>
+          <a href="../ciclo/cicloCaptura.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Captura Ciclo
+          </a>
+        </li>
+        <li>
+          <a href="../ciclo/cicloConsulta.php" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
+            Consulta Ciclos
+          </a>
+        </li>
+        <li>
           <a href="../index.php" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use xlink:href="#people-circle" />

@@ -6,6 +6,10 @@ function buscarCiclos(){
     return buscarCiclosDAO();
 }
 
+function buscarCiclosFiltros($ciclo){
+    return buscarCiclosFiltrosDAO($ciclo);
+}
+
 function consultaCiclosSelect($idSelect, $required)
 {
     $select = '<select id="txtCiclo" onchange="setCiclo(this.selectedIndex);" '. $required .' name="txtCiclo" class="form-select">';
